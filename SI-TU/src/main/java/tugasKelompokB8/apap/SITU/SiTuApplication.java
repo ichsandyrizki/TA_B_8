@@ -1,4 +1,4 @@
-package tugasKelompokB8.apap.SITU;
+package tugaskelompokb8.apap.situ;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

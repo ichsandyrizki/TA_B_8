@@ -8,11 +8,11 @@
 		<version>2.2.0.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>tugasKelompokB8.apap</groupId>
-	<artifactId>SI-TU</artifactId>
+	<groupId>tugas-kelompok-b8.apap</groupId>
+	<artifactId>si-tu</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>SI-TU</name>
-	<description>Demo project for Spring Boot</description>
+	<name>si-tu</name>
+	<description>Tugas Kelompok Apap Kelompok B8</description>
 
 	<properties>
 		<java.version>11</java.version>

@@ -1,4 +1,4 @@
-package tugasKelompokB8.apap.SITU;
+package tugaskelompokb8.apap.situ;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
