@@ -8,8 +8,9 @@
 
 <body>
 <nav th:replace="fragments/fragment :: navbar"></nav>
-<div class="containter-fluid">
-
+<h2 th:text="'Hello ' + ${#httpServletRequest.remoteUser} + ' !'">Login as</h2>
+	
+	
 </div>
 </body>
 </html>
