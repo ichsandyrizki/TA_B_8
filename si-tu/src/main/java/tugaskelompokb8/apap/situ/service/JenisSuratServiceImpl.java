@@ -6,6 +6,8 @@ import org.springframework.transaction.annotation.Transactional;
 import tugaskelompokb8.apap.situ.model.JenisSuratModel;
 import tugaskelompokb8.apap.situ.repository.JenisSuratDb;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class JenisSuratServiceImpl implements JenisSuratService{
@@ -25,12 +27,17 @@ public class JenisSuratServiceImpl implements JenisSuratService{
 
     @Override
     public JenisSuratModel getJenisSuratByNama(String nama) {
-        return jenisSuratDb.findByNama(nama).get();
+        return jenisSuratDb.findByNama(nama);
     }
 
     @Override
     public JenisSuratModel getJenisSuratById(Long id) {
-        return jenisSuratDb.findByIdJenisSurat(id).get();
+        return jenisSuratDb.findByIdJenisSurat(id);
+    }
+
+    @Override
+    public List<JenisSuratModel> getJenisSuratList() {
+        return jenisSuratDb.findAll();
     }
 
 }

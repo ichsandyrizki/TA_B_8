@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import tugaskelompokb8.apap.situ.model.JenisSuratModel;
 import tugaskelompokb8.apap.situ.service.JenisSuratService;
 
+import java.util.List;
+
 @Controller
 public class JenisSuratController {
     @Qualifier("jenisSuratServiceImpl")
@@ -18,24 +20,25 @@ public class JenisSuratController {
     private JenisSuratService jenisSuratService;
 
 
-    @RequestMapping(value = "jenisSurat/add", method = RequestMethod.GET)
+    @RequestMapping(value = "/jenisSurat/add", method = RequestMethod.GET)
     public String addJenisSuratFormPage(Model model){
         JenisSuratModel newJenisSurat = new JenisSuratModel();
         model.addAttribute("jenisSurat", newJenisSurat);
-        return "form-add-jenis-surat";
+        return "formAdd-jenis-surat";
     }
-    @RequestMapping(value = "jenisSurat/add", method = RequestMethod.POST)
+    @RequestMapping(value = "/jenisSurat/add", method = RequestMethod.POST)
     public String addJenisSuratSubmit(@ModelAttribute JenisSuratModel jenisSurat, Model model){
-
-        if(jenisSuratService.getJenisSuratByNama(jenisSurat.getNama()) == null){
+        System.out.println(jenisSuratService.getJenisSuratByNama(jenisSurat.getNama()));
+        JenisSuratModel jenis = jenisSuratService.getJenisSuratByNama(jenisSurat.getNama());
+        if(jenis != null){
+            model.addAttribute("nama", jenisSurat.getNama());
+            model.addAttribute("message","Sudah terdapat didalam sistem");
+            return "failPage-jenis-surat";
+        }else{
             jenisSuratService.addJenisSurat(jenisSurat);
             model.addAttribute("nama", jenisSurat.getNama());
             model.addAttribute("message","Berhasil menambahkan jenis surat");
             return "successPage-jenis-surat";
-        }else{
-            model.addAttribute("nama", jenisSurat.getNama());
-            model.addAttribute("message","Sudah terdapat jenis surat ini didala sistem");
-            return "failPage-jenis-surat";
         }
     }
     @RequestMapping(value = "jenisSurat/delete/{idJenisSurat}", method = RequestMethod.GET)
@@ -46,9 +49,16 @@ public class JenisSuratController {
         }else{
             String nama = jenisSuratService.getJenisSuratById(idJenisSurat).getNama();
             jenisSuratService.deleteJenisSurat(idJenisSurat);
-            model.addAttribute("message","Jenis surat berhasil dihapus");
-            model.addAttribute("nama", nama);
-            return "succesPage-jenis-surat";
+            model.addAttribute("message",",Jenis surat berhasil dihapus");
+            model.addAttribute("nama", " ");
+            return "successPage-jenis-surat";
         }
+    }
+    @RequestMapping(value = "/jenisSurat/view")
+    public String viewAll(Model model){
+            //Mengambil data dari jenis surat yang ada
+            List<JenisSuratModel> jenisSuratList = jenisSuratService.getJenisSuratList();
+            model.addAttribute("jenisSuratList",jenisSuratList);
+            return "viewAll-jenis-surat";
     }
 }

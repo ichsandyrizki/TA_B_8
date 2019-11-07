@@ -17,4 +17,8 @@ public interface JenisSuratService {
 
     //Method untuk mencari jenis surat berdasarkan id
     JenisSuratModel getJenisSuratById(Long id);
+
+    //Method untuk mendapatkan seua jenis surat yang tersimpan
+    List<JenisSuratModel> getJenisSuratList();
+
 }

@@ -8,6 +8,6 @@ import java.util.Optional;
 
 public interface JenisSuratDb extends JpaRepository<JenisSuratModel, Long> {
     List<JenisSuratModel> removeByIdJenisSurat(Long id);
-    Optional<JenisSuratModel> findByNama(String nama);
-    Optional<JenisSuratModel> findByIdJenisSurat(Long id);
+    JenisSuratModel findByNama(String nama);
+    JenisSuratModel findByIdJenisSurat(Long id);
 }
