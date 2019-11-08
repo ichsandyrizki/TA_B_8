@@ -1,11 +1,11 @@
 package tugaskelompokb8.apap.situ.service;
+
 import tugaskelompokb8.apap.situ.model.JenisLowonganModel;
 import tugaskelompokb8.apap.situ.model.JenisSuratModel;
 
 import java.util.List;
 
 public interface JenisSuratService {
-
     //Method untuk menambah jenis surat
     boolean addJenisSurat(JenisSuratModel jenisSuratModel);
 

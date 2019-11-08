@@ -37,9 +37,8 @@ public class PengajuanSuratModel implements Serializable{
 	@NotNull
 	@Column(name = "tanggal_pengajuan", columnDefinition = "DATE", nullable = false)
 	private Date tanggalPengajuan;
-	
-	@NotNull
-	@Column(name = "tanggal_disetujui", columnDefinition = "DATE", nullable = false)
+
+	@Column(name = "tanggal_disetujui", columnDefinition = "DATE")
 	private Date tanggalDisetujui;
 	
 	@NotNull

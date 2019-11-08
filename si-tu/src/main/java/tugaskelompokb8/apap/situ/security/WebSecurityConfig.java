@@ -22,15 +22,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/css/**").permitAll()
                 .antMatchers("/js/**").permitAll()
                 .antMatchers("/changePassword").permitAll()
-                .antMatchers("/addUser").permitAll()
                 .anyRequest().authenticated()
-                .and()
 
+                .and()
                 .formLogin()
                 .loginPage("/login").permitAll()
                 .and()
-
-
                 .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login").permitAll();
 
     }
