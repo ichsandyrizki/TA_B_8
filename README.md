@@ -7,3 +7,29 @@
 * **Angelina Condro**
 
 ---
+## Kontrak Tahap 1
+| NPM        | Nama Lengkap           | Fitur  |
+| ------------- |:-------------:| -----:|
+| *ketua*    | -    |    |
+| *anggota*  | -    |    |
+| *anggota*  | -    |    |
+| *anggota*  | -    |    |	
+| *anggota*  | -    |    |
+
+## Kontrak Tahap 2
+| NPM        | Nama Lengkap           | Fitur  |
+| ------------- |:-------------:| -----:|
+| *ketua*    | -    |    |
+| *anggota*  | -    |    |
+| *anggota*  | -    |    |
+| *anggota*  | -    |    |	
+| *anggota*  | -    |    |
+
+## Kontrak Tahap 3
+| NPM        | Nama Lengkap           | Fitur  |
+| ------------- |:-------------:| -----:|
+| *ketua*    | -    |    |
+| *anggota*  | -    |    |
+| *anggota*  | -    |    |
+| *anggota*  | -    |    |	
+| *anggota*  | -    |    |
