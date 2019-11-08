@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title> Add Pasien </title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<h3> Tambah Pasien </h3>
+<br>
+<form th:action="@{/surat/add}" class = "form-group" th:object="${surat}" method="POST" style="width:50%">
+    <input type="hidden" name="idPengajuanSurat" />
+    Jenis Surat
+    <div th:each="jenis, iterationStatus:*{listJenisSurat}">
+        <select id = "jenisSurat" th:field="*{jenisSurat}" class="form-control" name="jenisSurat">
+            <option th:each="jenis : ${listJenisSurat}"
+                    th:value ="${jenis.id}"
+                    th:text="${jenis.nama}"></option>
+        </select>
+    </div>
+    <br>
+    Keterangan
+    <input type="text" id="keterangan" name="keterangan" class="form-control"/>
+    <br>
+
+    <button type="submit" class="btn btn-primary" name="submit"> Submit </button>
+</form>
+</body>
+</html>
