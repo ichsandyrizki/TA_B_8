@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title> Home </title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+    <nav th:replace="fragments/fragment :: navbar"></nav>
+    <div class="content container-fluid" style="padding:20px">
+        <h2>Daftar Obat</h2>
+        <br>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th>No</th>
+                    <th>Kode</th>
+                    <th>Nama</th>
+                    <th>Harga</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="obat,iterationStatus: *{obatList}"
+                    th:style="${iterationStatus.even}?'color:gray'">
+                    <td th:text="${iterationStatus.count}"></td>
+                    <td th:text="${obat.kode}"></td>
+                    <td th:text="${obat.nama}"></td>
+                    <td th:text="@{Rp}+${obat.harga}"></td>
+                    <td>
+                        <div class="btn">
+                            <form th:action="@{/obat/view}" method="GET">
+                                <button name="noReg" type= "submit" class="btn btn-sm btn-info" th:value="${obat.nomorregistrasi}">Lihat</button>
+                            </form>
+                        </div>
+                        <div class="btn">
+                            <form th:action="@{/obat/ubah}" method="GET">
+                                <button name="id" type= "submit" class="btn btn-sm btn-dark" th:value="${obat.id}">Ubah</button>
+                            </form>
+                        </div>
+                        <button class="btn btn-sm btn-danger">
+                            <a th:href="@{/obat/hapus/}+${obat.id}" style="color:white" method="POST">Hapus</a>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+<!--        <form th:action="@{/obat/add}" th:onject="${obat}" method="POST" class="form-inline my-2 my-lg-0" style="float:right">-->
+        <div style="float:right">
+            <button class="btn btn-sm btn-warning my-2 my-sm-0">
+                <a th:href="@{/obat/tambah}" style="color:white" >Tambah Obat</a>
+            </button>
+        </div>
+<!--        </form>-->
+    </div>
+    <br>
+    <footer th:replace="fragments/fragment :: footerpage"></footer>
+</body>
+</html>
