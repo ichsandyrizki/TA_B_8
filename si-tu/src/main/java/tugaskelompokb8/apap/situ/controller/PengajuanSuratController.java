@@ -60,7 +60,7 @@ public class PengajuanSuratController {
     }
 
     @RequestMapping("/pengajuanSurat/statuses")
-    public String home(Model model){
+    public String pengajuanViewAll(Model model){
         List<PengajuanSuratModel> pengajuanSuratModelList = pengajuanSuratService.getPengajuanSuratList();
 
         model.addAttribute("pengajuan_list",pengajuanSuratModelList);
@@ -88,7 +88,6 @@ public class PengajuanSuratController {
             @PathVariable(value="idPengajuanSurat") Long idPengajuanSurat
     ){
         PengajuanSuratModel updatedModel = pengajuanSuratService.updatePengajuan(pengajuanSuratModel);
-        updatedModel.setNomorSurat(pengajuanSuratService.createNomor());
         pengajuanSuratService.addPengajuanSurat(updatedModel);
 
         return "redirect:/";
