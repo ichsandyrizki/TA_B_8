@@ -53,7 +53,7 @@ public class JenisLowonganController {
     //TODO:Menghapus Jenis Lowongan
     @RequestMapping(value = "/jenis-lowongan/delete/{idJenis}", method = RequestMethod.GET)
     public String deleteJenisLowongan(@PathVariable(value = "idJenis") long idJenis, Model model) {
-        jenisLowonganService.deleteObat(jenisLowonganService.getJenisById(idJenis));
+        jenisLowonganService.deleteJenisLowongan(jenisLowonganService.getJenisById(idJenis));
         model.addAttribute("nothide", false);
         model.addAttribute("titlepage", "Form Add Jenis Lowongan");
         model.addAttribute("jenisList", jenisLowonganService.getJenisList());

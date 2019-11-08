@@ -44,7 +44,7 @@ public class JenisLowonganServiceImpl implements JenisLowonganService {
     }
 
     @Override
-    public void deleteObat(JenisLowonganModel jenisModel) {
+    public void deleteJenisLowongan(JenisLowonganModel jenisModel) {
         jenisLowonganDb.delete(jenisModel);
     }
 
