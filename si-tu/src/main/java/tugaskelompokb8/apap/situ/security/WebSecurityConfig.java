@@ -14,7 +14,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-	
+
 	@Override
     protected void configure(HttpSecurity htpp) throws Exception {
         htpp
@@ -37,15 +37,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public BCryptPasswordEncoder encoder(){
         return new BCryptPasswordEncoder();
     }
-    
-//  @Autowired
-//  public void configureGlobal (AuthenticationManagerBuilder auth) throws Exception {
-//      auth.inMemoryAuthentication()
-//              .passwordEncoder(encoder())
-//              .withUser("sandi").password(encoder().encode("bhirama"))
-//              .roles("Kepala Sekolah");
-//  }
-  
+
+//   @Autowired
+//   public void configureGlobal (AuthenticationManagerBuilder auth) throws Exception {
+//       auth.inMemoryAuthentication()
+//               .passwordEncoder(encoder())
+//               .withUser("sandi").password(encoder().encode("bhirama"))
+//               .roles("Kepala Sekolah");
+//   }
+
   @Autowired
   private UserDetailsService userDetailsService;
 
@@ -53,5 +53,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception{
       auth.userDetailsService(userDetailsService).passwordEncoder(encoder());
   }
-  
+
 }

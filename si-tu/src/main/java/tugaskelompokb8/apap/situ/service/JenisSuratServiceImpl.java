@@ -11,8 +11,29 @@ import java.util.List;
 @Service
 @Transactional
 public class JenisSuratServiceImpl implements JenisSuratService{
+
     @Autowired
     JenisSuratDb jenisSuratDb;
+
+    @Override
+    public void addJenisSurat(JenisSuratModel jenisSuratModel) {
+        jenisSuratDb.save(jenisSuratModel);
+    }
+
+    @Override
+    public void deleteJenisSurat(Long idJenisSurat) {
+        jenisSuratDb.removeByIdJenisSurat(idJenisSurat);
+    }
+
+    @Override
+    public JenisSuratModel getJenisSuratByNama(String nama) {
+        return jenisSuratDb.findByNama(nama);
+    }
+
+    @Override
+    public JenisSuratModel getJenisSuratById(Long id) {
+        return jenisSuratDb.findByIdJenisSurat(id);
+    }
 
     @Override
     public List<JenisSuratModel> getJenisSuratList() {

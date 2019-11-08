@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title> Tambah Jenis Surat </title>
+</head>
+
+<body>
+
+<div class="containter-fluid">
+    <h3>Tambah Jenis Surat</h3>
+    <form th:action="@{/jenisSurat/add}" th:object="${jenisSurat}" method="POST">
+        Nama: <br>
+        <input type="text" name="nama"/>
+        <br>
+        Keterangan : <br>
+        <input type="text" name="keterangan"/>
+        <br>
+        <button type="submit">Submit</button>
+    </form>
+</div>
+</body>
+</html>
