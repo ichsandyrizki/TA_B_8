@@ -28,7 +28,7 @@ public class UserController {
 	@RequestMapping(value = "/addUser", method = RequestMethod.POST)
 	private String addUserSubmit(@ModelAttribute UserModel user) {
 		userService.addUser(user);
-		return "index";
+		return "home";
 	}
 	
 	
@@ -59,7 +59,7 @@ public class UserController {
 		}else {
 			userService.changeUser(user, changePassword.getNewPassword());
 			model.addAttribute("messages","");
-			return "index";
+			return "home";
 		}
 	}
 }
