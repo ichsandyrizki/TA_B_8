@@ -10,7 +10,7 @@ public interface PengajuanSuratService {
 
     void addPengajuanSurat(PengajuanSuratModel surat);
     List<PengajuanSuratModel> getPengajuanSuratList();
-    void deletePengajuanSurat(Long id);
+    public void deletePengajuanSurat(Long id);
     Optional<PengajuanSuratModel> getPengajuanById(long idPengajuanSurat);
     String createNomor();
     List<String> getAllNomor();
