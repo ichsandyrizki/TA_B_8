@@ -16,10 +16,31 @@ public class JenisSuratServiceImpl implements JenisSuratService{
     JenisSuratDb jenisSuratDb;
 
     @Override
-    public void addJenisSurat(JenisSuratModel jenisSuratModel) {
-        jenisSuratDb.save(jenisSuratModel);
+    public boolean addJenisSurat(JenisSuratModel jenisSurat) {
+        List<JenisSuratModel> jenisSuratList = jenisSuratDb.findAll();
+        for(int i = 0; i < jenisSuratDb.findAll().size(); i++){
+            if(jenisSurat.getNama().equalsIgnoreCase(jenisSuratList.get(i).getNama())){
+                return true;
+            }
+        }
+        jenisSuratDb.save(jenisSurat);
+        return false;
     }
 
+
+    /*@Override
+    public boolean addJenisLowongan(JenisLowonganModel jenisLowongan) {
+        List<JenisLowonganModel> listLowongan = jenisLowonganDb.findAll();
+        for(int i = 0; i < jenisLowonganDb.findAll().size(); i++){
+            if(jenisLowongan.getNama().toLowerCase().equals(listLowongan.get(i).getNama().toLowerCase())){
+                return true;
+            }
+        }
+        jenisLowonganDb.save(jenisLowongan);
+        return false;
+
+    }
+*/
     @Override
     public void deleteJenisSurat(Long idJenisSurat) {
         jenisSuratDb.removeByIdJenisSurat(idJenisSurat);
