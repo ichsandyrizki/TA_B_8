@@ -11,16 +11,16 @@
     <table class="table" >
         <thead>
         <tr>
-            <th scope="col">No</th>
-            <th scope="col">Nama</th>
+            <th scope="col">Id</th>
             <th scope="col">Keterangan</th>
+            <th scope="col">Status</th>
             <th scope="col"></th>
         </tr>
         </thead>
-        <tbody th:each="jenisSurat, iterationStatus : ${jenisSuratList}">
+        <tbody th:each="pengajuan, iterationStatus : ${pengajuan_list}">
         <tr>
             <th scope="row" th:text="${iterationStatus.count}"></th>
-            <td th:text="${jenisSurat.nama}"></td>
+            <td th:text="${pengajuan.nama}"></td>
             <td th:text="${jenisSurat.Keterangan}"></td>
             <td>
             <form th:action="@{/jenisSurat/delete/} + ${jenisSurat.idJenisSurat}" th:method="GET">
