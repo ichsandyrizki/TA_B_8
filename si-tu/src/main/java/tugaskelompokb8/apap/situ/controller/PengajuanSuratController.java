@@ -49,7 +49,7 @@ public class PengajuanSuratController {
         return "index";
     }
 
-    @RequestMapping(value = "pengajuanSurat/delete/{idSurat}")
+    @RequestMapping(value = "/pengajuanSurat/delete/{idSurat}")
     public String deleteStore(
             @PathVariable(value="idSurat") Long idSurat,
             Model model
@@ -57,6 +57,41 @@ public class PengajuanSuratController {
         pengajuanSuratService.deletePengajuanSurat(idSurat);
 
         return "index";
+    }
+
+    @RequestMapping("/pengajuanSurat/statuses")
+    public String home(Model model){
+        List<PengajuanSuratModel> pengajuanSuratModelList = pengajuanSuratService.getPengajuanSuratList();
+
+        model.addAttribute("pengajuan_list",pengajuanSuratModelList);
+
+        return "pengajuan-view-all";
+    }
+
+
+    @RequestMapping(value = "/pengajuanSurat/update/{idPengajuanSurat}",method = RequestMethod.GET)
+    public String updatePengajuanSuratFormPage(
+            Model model,
+            @PathVariable(value="idPengajuanSurat") Long idPengajuanSurat
+    ){
+        PengajuanSuratModel pengajuanSuratModel = pengajuanSuratService.getPengajuanById(idPengajuanSurat).get();
+
+        model.addAttribute("pengajuanSurat", pengajuanSuratModel);
+
+        return "pengajuan-update";
+    }
+
+    @RequestMapping(value = "/pengajuanSurat/update/{idPengajuanSurat}",method = RequestMethod.POST)
+    public String updatePengajuanSuratSubmit(
+            Model model,
+            @ModelAttribute PengajuanSuratModel pengajuanSuratModel,
+            @PathVariable(value="idPengajuanSurat") Long idPengajuanSurat
+    ){
+        PengajuanSuratModel updatedModel = pengajuanSuratService.updatePengajuan(pengajuanSuratModel);
+        updatedModel.setNomorSurat(pengajuanSuratService.createNomor());
+        pengajuanSuratService.addPengajuanSurat(updatedModel);
+
+        return "redirect:/";
     }
 
 }

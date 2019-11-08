@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Ubah Status</title>
+</head>
+<body>
+<div >
+    <h2>Ubah status</h2>
+    <form th:action="@{/pengajuanSurat/update/}+${pengajuanSurat.idPengajuanSurat}" th:object="${doctor}" method="POST">
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" for="exampleFormControlSelect1">Status Peminjaman</label>
+            <div class="col-sm-10">
+                <select name="gender" class="form-control" id="exampleFormControlSelect1">
+                    <option th:value="1">ditolak</option>
+                    <option th:value="2">disetujui</option>
+                    <option th:value="3">diproses</option>
+                    <option th:value="2">selesai</option>
+                </select>
+            </div>
+        </div>
+
+        <button class="btn btn-sm btn-primary" type="submit" >Submit</button>
+    </form>
+</div>
+</body>
+</html>

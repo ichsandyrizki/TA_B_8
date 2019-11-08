@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<title> View All Pengajuan Surat </title>
+
+</head>
+
+<body>
+
+<div class="containter-fluid">
+    <table class="table" >
+        <thead>
+        <tr>
+            <th scope="col">No</th>
+            <th scope="col">Keterangan</th>
+            <th scope="col">status</th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody th:each="pengajuanSurat, iterationStatus : ${}">
+        <tr>
+            <th scope="row" th:text="${iterationStatus.count}"></th>
+            <td th:text="${pengajuanSurat.keterangan}"></td>
+            <td th:switch="${pengajuanSurat.status.id}">
+                <p th:case="0">Menunggu Persetujuan</p>
+                <p th:case="1">Ditolak</p>
+                <p th:case="2">Disetujui</p>
+                <p th:case="3">Diproses</p>
+                <p th:case="4">Selesai</p>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
