@@ -1,6 +1,8 @@
 package tugaskelompokb8.apap.situ.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +34,21 @@ public class UserServiceImpl implements UserService{
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		String hashedPassword = passwordEncoder.encode(password);
 		return hashedPassword;
+	}
+
+	@Override
+	public UserModel getUserCurrentLoggedIn(){
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String username = "";
+
+		if (principal instanceof UserDetails) {
+			username = ((UserDetails)principal).getUsername();
+		}
+		else {
+			username = principal.toString();
+		}
+
+		return userDb.findByUsername(username);
 	}
 
 }

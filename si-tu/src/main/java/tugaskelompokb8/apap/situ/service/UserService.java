@@ -7,4 +7,5 @@ public interface UserService {
 	UserModel addUser(UserModel user);
 	UserModel changeUser(UserModel oldUser, String newPass);
 	public String encrypt(String password);
+	UserModel getUserCurrentLoggedIn();
 }
