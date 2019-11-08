@@ -18,5 +18,5 @@ public interface JenisLowonganService {
     JenisLowonganModel changeJenis(JenisLowonganModel jenisModel);
 
     //Method untuk menghapus data jenis
-    void deleteObat(JenisLowonganModel jenisModel);
+    void deleteJenisLowongan(JenisLowonganModel jenisModel);
 }

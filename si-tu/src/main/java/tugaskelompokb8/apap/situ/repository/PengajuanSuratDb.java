@@ -5,4 +5,5 @@ import tugaskelompokb8.apap.situ.model.JenisSuratModel;
 import tugaskelompokb8.apap.situ.model.PengajuanSuratModel;
 
 public interface PengajuanSuratDb extends JpaRepository<PengajuanSuratModel, Long> {
+    void deleteByIdPengajuanSurat(Long aLong);
 }

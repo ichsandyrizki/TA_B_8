@@ -7,8 +7,5 @@ import tugaskelompokb8.apap.situ.model.JenisSuratModel;
 import java.util.Optional;
 
 public interface JenisLowonganDb extends JpaRepository<JenisLowonganModel, Long> {
-    Optional<JenisLowonganModel> findById(long id);
-
-    @Override
-    void deleteById(Long aLong);
+    Optional<JenisLowonganModel> findByIdJenisLowongan(Long id);
 }

@@ -27,7 +27,7 @@ public class PengajuanSuratServiceImpl implements PengajuanSuratService {
 
     @Override
     public void deletePengajuanSurat(Long id){
-        pengajuanSuratDb.deleteById(id);
+        pengajuanSuratDb.deleteByIdPengajuanSurat(id);
     }
 
 }
