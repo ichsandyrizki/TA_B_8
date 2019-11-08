@@ -17,11 +17,11 @@
             <th scope="col"></th>
         </tr>
         </thead>
-        <tbody th:each="pengajuanSurat, iterationStatus : ${}">
+        <tbody th:each="pengajuanSurat, iterationStatus : ${pengajuan_list}">
         <tr>
             <th scope="row" th:text="${iterationStatus.count}"></th>
             <td th:text="${pengajuanSurat.keterangan}"></td>
-            <td th:switch="${pengajuanSurat.status.id}">
+            <td th:switch="${pengajuanSurat.status}">
                 <p th:case="0">Menunggu Persetujuan</p>
                 <p th:case="1">Ditolak</p>
                 <p th:case="2">Disetujui</p>
