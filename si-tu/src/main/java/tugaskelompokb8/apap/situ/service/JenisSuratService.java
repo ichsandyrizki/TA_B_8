@@ -7,7 +7,7 @@ import java.util.List;
 public interface JenisSuratService {
 
     //Method untuk menambah jenis surat
-    void addJenisSurat(JenisSuratModel jenisSuratModel);
+    boolean addJenisSurat(JenisSuratModel jenisSuratModel);
 
     //Method untuk menghapus jenis surat
     void deleteJenisSurat(Long idJenisSurat);
