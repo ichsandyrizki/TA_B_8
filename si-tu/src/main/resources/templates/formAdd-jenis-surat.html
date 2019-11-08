@@ -2,12 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title> Tambah Jenis Surat </title>
-    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
-    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
 </head>
 
 <body>
-<nav th:replace="fragments/fragment :: navbar"></nav>
 <div class="containter-fluid">
     <h3>Tambah Jenis Surat</h3>
     <form th:action="@{/jenisSurat/add}" th:object="${jenisSurat}" method="POST">
