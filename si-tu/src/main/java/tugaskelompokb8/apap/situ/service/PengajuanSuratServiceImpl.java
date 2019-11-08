@@ -75,6 +75,7 @@ public class PengajuanSuratServiceImpl implements PengajuanSuratService {
         PengajuanSuratModel modelFromDb = pengajuanSuratDb.findById(model.getIdPengajuanSurat()).get();
 
         modelFromDb.setStatus(model.getStatus());
+        modelFromDb.setNomorSurat(createNomor());
         pengajuanSuratDb.save(modelFromDb);
         return modelFromDb;
     }

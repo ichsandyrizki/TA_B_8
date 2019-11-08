@@ -88,7 +88,6 @@ public class PengajuanSuratController {
             @PathVariable(value="idPengajuanSurat") Long idPengajuanSurat
     ){
         PengajuanSuratModel updatedModel = pengajuanSuratService.updatePengajuan(pengajuanSuratModel);
-        updatedModel.setNomorSurat(pengajuanSuratService.createNomor());
         pengajuanSuratService.addPengajuanSurat(updatedModel);
 
         return "redirect:/";
