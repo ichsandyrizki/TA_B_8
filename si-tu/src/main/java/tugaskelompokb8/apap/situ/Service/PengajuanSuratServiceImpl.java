@@ -5,7 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import tugaskelompokb8.apap.situ.Repository.PengajuanDb;
+import tugaskelompokb8.apap.situ.Repository.PengajuanSuratDb;
 import tugaskelompokb8.apap.situ.model.*;
 
 import java.text.DateFormat;
@@ -15,10 +15,10 @@ import java.util.*;
 
 @Service
 @Transactional
-public class PengajuanServiceImpl implements PengajuanService{
+public class PengajuanSuratServiceImpl implements PengajuanSuratService {
 
     @Autowired
-    private PengajuanDb pengajuanDb;
+    private PengajuanSuratDb pengajuanDb;
 
     @Override
     public List<PengajuanSuratModel> getAllPengajuan(){
@@ -41,7 +41,7 @@ public class PengajuanServiceImpl implements PengajuanService{
     }
 
     @Override
-    public String createNomor(PengajuanSuratModel model){
+    public String createNomor(){
         Date date = new Date();
         String nomor ="";
         List<String> listNomor = getAllNomor();
@@ -55,9 +55,9 @@ public class PengajuanServiceImpl implements PengajuanService{
             }
         }while (listNomor.contains(nomor));
 
-        nomor += date;
+
+        nomor += strDate;
         return nomor;
     }
-
 
 }

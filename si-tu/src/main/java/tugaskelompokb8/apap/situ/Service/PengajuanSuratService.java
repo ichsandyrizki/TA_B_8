@@ -6,10 +6,10 @@ import tugaskelompokb8.apap.situ.model.PengajuanSuratModel;
 import java.util.List;
 import java.util.Optional;
 
-public interface PengajuanService {
+public interface PengajuanSuratService {
 
     List<PengajuanSuratModel> getAllPengajuan();
     Optional<PengajuanSuratModel> getPengajuanById(long idPengajuanSurat);
-    String createNomor(PengajuanSuratModel model);
+    String createNomor();
     List<String> getAllNomor();
 }

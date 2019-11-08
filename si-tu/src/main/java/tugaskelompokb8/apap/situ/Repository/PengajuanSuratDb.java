@@ -6,5 +6,5 @@ import tugaskelompokb8.apap.situ.model.PengajuanSuratModel;
 
 
 @Repository
-public interface PengajuanDb extends JpaRepository<PengajuanSuratModel, Long>{
+public interface PengajuanSuratDb extends JpaRepository<PengajuanSuratModel, Long>{
 }
