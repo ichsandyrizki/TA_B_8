@@ -29,16 +29,18 @@ public class PengajuanSuratController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/surat/add", method = RequestMethod.GET)
+    @RequestMapping(value = "/pengajuanSurat/add", method = RequestMethod.GET)
     public String addPengajuanSuratFormPage(Model model) {
         PengajuanSuratModel suratBaru = new PengajuanSuratModel();
         List<JenisSuratModel> listJenisSurat = jenisSuratService.getJenisSuratList();
+        List<PengajuanSuratModel> pengajuanSuratModelList = pengajuanSuratService.getPengajuanSuratList();
+        model.addAttribute("pengajuan_list",pengajuanSuratModelList);
         model.addAttribute("surat", suratBaru);
         model.addAttribute("listJenisSurat", listJenisSurat);
         return "form-pengajuan-surat";
     }
 
-    @RequestMapping(value = "/surat/add", method = RequestMethod.POST, params={"submit"})
+    @RequestMapping(value = "/pengajuanSurat/add", method = RequestMethod.POST, params={"submit"})
     private String addPengajuanSuratSubmit(@ModelAttribute PengajuanSuratModel surat){
         surat.setTanggalDisetujui(null);
         surat.setStatus(0);
@@ -46,7 +48,7 @@ public class PengajuanSuratController {
         surat.setUser(userService.getUserCurrentLoggedIn());
         surat.setTanggalPengajuan(Date.valueOf(LocalDate.now()));
         pengajuanSuratService.addPengajuanSurat(surat);
-        return "index";
+        return "form-pengajuan-surat";
     }
 
     @RequestMapping(value = "/pengajuanSurat/delete/{idSurat}")
@@ -56,7 +58,7 @@ public class PengajuanSuratController {
     ){
         pengajuanSuratService.deletePengajuanSurat(idSurat);
 
-        return "index";
+        return "form-pengajuan-surat";
     }
 
     @RequestMapping("/pengajuanSurat/statuses")
@@ -65,7 +67,7 @@ public class PengajuanSuratController {
 
         model.addAttribute("pengajuan_list",pengajuanSuratModelList);
 
-        return "pengajuan-view-all";
+        return "form-pengajuan-surat";
     }
 
 
