@@ -7,19 +7,16 @@
     <object th:include="fragments/fragment :: js" th:remove="tag"></object>
 </head>
 <body>
-<nav th:replace="fragments/fragment :: navbar"></nav>
-<h3> Tambah Pasien </h3>
+<h3> Tambah Pengajuan Surat </h3>
 <br>
 <form th:action="@{/surat/add}" class = "form-group" th:object="${surat}" method="POST" style="width:50%">
     <input type="hidden" name="idPengajuanSurat" />
     Jenis Surat
-    <div th:each="jenis, iterationStatus:*{listJenisSurat}">
         <select id = "jenisSurat" th:field="*{jenisSurat}" class="form-control" name="jenisSurat">
             <option th:each="jenis : ${listJenisSurat}"
-                    th:value ="${jenis.id}"
+                    th:value ="${jenis.idJenisSurat}"
                     th:text="${jenis.nama}"></option>
         </select>
-    </div>
     <br>
     Keterangan
     <input type="text" id="keterangan" name="keterangan" class="form-control"/>

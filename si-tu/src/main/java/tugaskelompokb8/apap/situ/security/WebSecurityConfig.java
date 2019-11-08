@@ -24,7 +24,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/changePassword").permitAll()
                 .anyRequest().authenticated()
                 .and()
-
                 .formLogin()
                 .loginPage("/login").permitAll()
                 .and()
