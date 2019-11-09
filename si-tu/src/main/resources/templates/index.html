@@ -22,10 +22,9 @@
             <div class="container-fluid mt-3">
                 <div class="row">
                     <div class="col-12">
-                        <div class="card gradient-1">
+                        <div class="card gradient-8">
                             <div class="card-body">
-                                <h1 style="color:white">Hello!</h1>
-                                <h2 style="color:white" th:text="${#httpServletRequest.remoteUser}"></h2>
+                                <h1 style="color:white">Hello <b style="color:white" th:text="${#httpServletRequest.remoteUser}"></b>!</h1>
                             </div>
                         </div>
                     </div>
@@ -36,10 +35,10 @@
                             <div class="card-body">
                                 <h3 class="card-title text-white">Pengajuan Surat</h3>
                                 <div class="d-inline-block">
-                                    <h2 class="text-white"></h2>
+                                    <h2 class="text-white" th:text="${jmlSurat}"></h2>
                                     <p class="text-white mb-0">Nov - Des 2019</p>
                                 </div>
-                                <span class="float-right display-5 opacity-5"><i class="fa fa-shopping-cart"></i></span>
+                                <span class="float-right display-5 opacity-5"><i class="fa fa-envelope"></i></span>
                             </div>
                         </div>
                     </div>
@@ -48,10 +47,10 @@
                             <div class="card-body">
                                 <h3 class="card-title text-white">Lowongan</h3>
                                 <div class="d-inline-block">
-                                    <h2 class="text-white"></h2>
+                                    <h2 class="text-white" th:text="${jmlLowongan}"></h2>
                                     <p class="text-white mb-0">Nov - Des 2019</p>
                                 </div>
-                                <span class="float-right display-5 opacity-5"><i class="fa fa-money"></i></span>
+                                <span class="float-right display-5 opacity-5"><i class="fa fa-id-card"></i></span>
                             </div>
                         </div>
                     </div>
@@ -60,7 +59,7 @@
                             <div class="card-body">
                                 <h3 class="card-title text-white">User</h3>
                                 <div class="d-inline-block">
-                                    <h2 class="text-white"></h2>
+                                    <h2 class="text-white" th:text="${jmlUser}"></h2>
                                     <p class="text-white mb-0">Nov - Des 2019</p>
                                 </div>
                                 <span class="float-right display-5 opacity-5"><i class="fa fa-users"></i></span>
