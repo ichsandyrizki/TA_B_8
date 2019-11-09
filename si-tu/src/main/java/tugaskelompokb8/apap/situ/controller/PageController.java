@@ -6,17 +6,29 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import tugaskelompokb8.apap.situ.model.LowonganModel;
 import tugaskelompokb8.apap.situ.model.PasswordModel;
+import tugaskelompokb8.apap.situ.repository.PengajuanSuratDb;
 import tugaskelompokb8.apap.situ.repository.RoleDb;
+import tugaskelompokb8.apap.situ.repository.UserDb;
 
 @Controller
 public class PageController {
 
 	@Autowired
 	RoleDb roleDb;
+
+	@Autowired
+    UserDb userDb;
+
+	@Autowired
+    PengajuanSuratDb pengajuanSuratDb;
 	
     @RequestMapping("/")
-    private String home(){
+    private String home(Model model){
+        model.addAttribute("jmlUser", userDb.findAll().size());
+        model.addAttribute("jmlSurat", pengajuanSuratDb.findAll().size());
+        model.addAttribute("jmlLowongan",0);
         return "index";
     }
     
