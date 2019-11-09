@@ -10,16 +10,16 @@
 
 </head>
 
-<body style="background-image: linear-gradient(to right, #ffa, #fdbbff );">
+<body style="background-color: #f8aaff36;">
 <div class="h-100" style="padding-top:5rem">
     <div class="container-fluid h-100">
         <div class="row justify-content-center h-100">
             <div class="col-xl-6">
-                <div class="card mb-0" style="border:0px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);background-color: rgba(255,255,255,0.7);">
-                    <div class="text-center card-header">
-                        Log In
-                    </div>
+                <div class="card mb-0" style="border:0px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2)">
                     <div class="card-body">
+                        <div class="text-center">
+                            Log In
+                        </div>
                         <div th:if="${param.error}">
                             <span style="color: red">Invalid username or password</span>
                         </div>
