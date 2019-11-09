@@ -91,7 +91,7 @@ public class PengajuanSuratController {
     ){
         PengajuanSuratModel updatedModel = pengajuanSuratService.updatePengajuan(pengajuanSuratModel);
 
-        return "redirect:/pengajuanSurat/statuses";
+        return "redirect:/";
     }
 
 }
