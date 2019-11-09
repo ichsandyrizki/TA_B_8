@@ -27,7 +27,7 @@ public class PengajuanSuratServiceImpl implements PengajuanSuratService {
 
     @Override
     public List<PengajuanSuratModel> getPengajuanSuratList(){
-            return pengajuanSuratDb.findAll();
+        return pengajuanSuratDb.findAll();
     }
 
     @Override
@@ -52,7 +52,8 @@ public class PengajuanSuratServiceImpl implements PengajuanSuratService {
 
     @Override
     public String createNomor(PengajuanSuratModel model){
-        String noSuratCurrent = model.getNomorSurat();
+        PengajuanSuratModel modelFromDb = pengajuanSuratDb.findById(model.getIdPengajuanSurat()).get();
+        String noSuratCurrent = modelFromDb.getNomorSurat();
         Date date = new Date();
         String nomor ="";
         List<String> listNomor = getAllNomor();
@@ -67,12 +68,10 @@ public class PengajuanSuratServiceImpl implements PengajuanSuratService {
         }while (listNomor.contains(nomor));
         nomor += strDate;
 
-        if (noSuratCurrent.length() == 8){
+        if (noSuratCurrent.length() == 14){
             return noSuratCurrent;
         }
-        else {
-            return nomor;
-        }
+        return nomor;
     }
 
     @Override
