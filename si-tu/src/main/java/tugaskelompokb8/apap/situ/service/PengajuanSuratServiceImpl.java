@@ -67,13 +67,12 @@ public class PengajuanSuratServiceImpl implements PengajuanSuratService {
         }while (listNomor.contains(nomor));
         nomor += strDate;
 
-//        if (noSuratCurrent.length() == 8){
-//            return noSuratCurrent;
-//        }
-//        else {
-//            return nomor;
-//        }
-        return nomor;
+        if (noSuratCurrent.length() == 8){
+            return noSuratCurrent;
+        }
+        else {
+            return nomor;
+        }
     }
 
     @Override
