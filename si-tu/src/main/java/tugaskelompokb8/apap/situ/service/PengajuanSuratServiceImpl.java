@@ -51,7 +51,8 @@ public class PengajuanSuratServiceImpl implements PengajuanSuratService {
     }
 
     @Override
-    public String createNomor(){
+    public String createNomor(PengajuanSuratModel model){
+        String noSuratCurrent = model.getNomorSurat();
         Date date = new Date();
         String nomor ="";
         List<String> listNomor = getAllNomor();
@@ -64,10 +65,14 @@ public class PengajuanSuratServiceImpl implements PengajuanSuratService {
                 nomor += numbers.charAt(randInt);
             }
         }while (listNomor.contains(nomor));
-
-
         nomor += strDate;
-        return nomor;
+
+        if (noSuratCurrent.length() == 8){
+            return noSuratCurrent;
+        }
+        else {
+            return nomor;
+        }
     }
 
     @Override
@@ -75,7 +80,7 @@ public class PengajuanSuratServiceImpl implements PengajuanSuratService {
         PengajuanSuratModel modelFromDb = pengajuanSuratDb.findById(model.getIdPengajuanSurat()).get();
 
         modelFromDb.setStatus(model.getStatus());
-        modelFromDb.setNomorSurat(createNomor());
+        modelFromDb.setNomorSurat(createNomor(model));
         pengajuanSuratDb.save(modelFromDb);
         return modelFromDb;
     }
