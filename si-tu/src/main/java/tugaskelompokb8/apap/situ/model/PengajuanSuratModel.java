@@ -19,6 +19,9 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonValue;
 
 
 
@@ -53,13 +56,11 @@ public class PengajuanSuratModel implements Serializable{
 	@ManyToOne(fetch = FetchType.EAGER, optional = false)
 	@JoinColumn(name="id_jenis_surat", referencedColumnName = "idJenisSurat", nullable = false)
 	@OnDelete(action = OnDeleteAction.CASCADE)
-	@JsonIgnore
 	private JenisSuratModel jenisSurat;
 	
 	@ManyToOne(fetch = FetchType.EAGER, optional = false)
 	@JoinColumn(name="uuid_user", referencedColumnName = "idUser", nullable = false)
 	@OnDelete(action = OnDeleteAction.CASCADE)
-	@JsonIgnore
 	private UserModel user;
 
 	public Long getIdPengajuanSurat() {
