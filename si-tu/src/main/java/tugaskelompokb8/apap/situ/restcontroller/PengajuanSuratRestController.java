@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import tugaskelompokb8.apap.situ.model.PengajuanSuratModel;
+import tugaskelompokb8.apap.situ.rest.PengajuanSuratDetail;
 import tugaskelompokb8.apap.situ.service.PengajuanSuratRestService;
 
 @RestController
@@ -21,7 +22,7 @@ public class PengajuanSuratRestController {
 	PengajuanSuratRestService pengajuanSuratRestService;
 	
 	@GetMapping(value="pengajuanSurat/{idPengajuanSurat}")
-	public PengajuanSuratModel retrievePengajuanSurat(@PathVariable("idPengajuanSurat") Long idPengajuan) {
+	public PengajuanSuratDetail retrievePengajuanSurat(@PathVariable("idPengajuanSurat") Long idPengajuan) {
 		try {
 			return pengajuanSuratRestService.getPengajuanSuratById(idPengajuan);
 		}
