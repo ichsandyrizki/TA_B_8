@@ -5,4 +5,5 @@ import tugaskelompokb8.apap.situ.rest.PengajuanSuratDetail;
 
 public interface PengajuanSuratRestService {
 	PengajuanSuratDetail getPengajuanSuratById(Long id);
+	PengajuanSuratModel createPengajuan(PengajuanSuratModel pengajuan);
 }
