@@ -62,21 +62,23 @@ Main wrapper start
                     <div class="card">
                         <div class="card-body">
                             <!--<div th:if="${nothide}" class="alert alert-danger" role="alert">-->
-                                <!--<b th:text="${success}"></b>-->
+                            <!--<b th:text="${success}"></b>-->
                             <!--</div>-->
                             <div class="table-responsive">
                                 <table class="table table-xs mb-0">
                                     <thead>
                                     <tr>
                                         <th scope="col">No</th>
+                                        <th scope="col">Nomor Surat</th>
                                         <th scope="col">Keterangan</th>
-                                        <th scope="col">Status</th>
+                                        <th scope="col">status</th>
                                         <th scope="col"></th>
                                     </tr>
                                     </thead>
                                     <tbody th:each="pengajuanSurat, iterationStatus : ${pengajuan_list}">
                                     <tr>
                                         <th scope="row" th:text="${iterationStatus.count}"></th>
+                                        <td th:text="${pengajuanSurat.nomorSurat}"></td>
                                         <td th:text="${pengajuanSurat.keterangan}"></td>
                                         <td th:switch="${pengajuanSurat.status}">
                                             <p th:case="0">Menunggu Persetujuan</p>
