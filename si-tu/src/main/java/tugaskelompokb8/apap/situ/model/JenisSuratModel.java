@@ -15,6 +15,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="jenis_surat")
 public class JenisSuratModel implements Serializable{
@@ -34,6 +36,7 @@ public class JenisSuratModel implements Serializable{
 	private String keterangan;
 	
 	@OneToMany(mappedBy = "jenisSurat", fetch=FetchType.LAZY, cascade = CascadeType.ALL)
+	@JsonIgnore
 	private List<PengajuanSuratModel> listPengajuanSurat;
 
 	public Long getIdJenisSurat() {
