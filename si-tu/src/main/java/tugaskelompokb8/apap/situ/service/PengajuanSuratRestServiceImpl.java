@@ -26,4 +26,10 @@ public class PengajuanSuratRestServiceImpl implements PengajuanSuratRestService{
 		return pengajuanApi;
 	}
 
+
+	@Override
+	public PengajuanSuratModel createPengajuan(PengajuanSuratModel pengajuan) {
+		return pengajuanSuratDb.save(pengajuan);
+	}
+
 }
