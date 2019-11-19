@@ -10,4 +10,5 @@ import tugaskelompokb8.apap.situ.model.UserModel;
 @Repository
 public interface UserDb extends JpaRepository<UserModel, Long>{
 	UserModel findByUsername(String Username);
+	UserModel findByIdUser(Long id);
 }
