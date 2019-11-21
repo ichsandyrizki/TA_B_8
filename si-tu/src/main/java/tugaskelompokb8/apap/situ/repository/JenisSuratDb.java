@@ -12,4 +12,5 @@ public interface JenisSuratDb extends JpaRepository<JenisSuratModel, Long> {
     List<JenisSuratModel> removeByIdJenisSurat(Long id);
     JenisSuratModel findByNama(String nama);
     JenisSuratModel findByIdJenisSurat(Long id);
+    List<JenisSuratModel> findAll();
 }
