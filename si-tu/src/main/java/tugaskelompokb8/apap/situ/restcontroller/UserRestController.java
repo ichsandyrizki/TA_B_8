@@ -24,9 +24,11 @@ public class UserRestController {
 	UserRestService userRestService;
 	
 	
-	
+	//BUAT NYOBA DIPOSTMAN
 	@GetMapping(value="user/{idUser}")
 	private Object getUserApi(@PathVariable String idUser){
+		Object user = userRestService.getUser(idUser);
+		System.out.println();
 		return userRestService.getUser(idUser);
 	}
 

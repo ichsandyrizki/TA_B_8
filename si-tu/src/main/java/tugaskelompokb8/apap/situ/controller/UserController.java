@@ -9,6 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -30,19 +31,14 @@ public class UserController {
 	@Autowired
 	UserDb userDb;
 	
+	@Autowired
+	UserRestService userRestService;
+	
 	@RequestMapping(value = "/addUser", method = RequestMethod.POST)
 	private String addUserSubmit(@ModelAttribute UserModel user) {
 		userService.addUser(user);
 		return "index";
 
-	}
-
-	@RequestMapping(value ="/viewUser")
-	private String viewUser(Model model){
-		UserModel user = userService.getUserCurrentLoggedIn();
-		userRestService.getUser(user)
-
-				return "view-user";
 	}
 
 	@RequestMapping(value= "/changePassword", method = RequestMethod.POST)
@@ -73,5 +69,13 @@ public class UserController {
 			model.addAttribute("messages","");
 			return "index";
 		}
+	}
+	
+	//WEBSERVICE GET USER PROFILE DARI SIVITAS
+	@RequestMapping("/{idUser}")
+	public String getUserProfile(@PathVariable String idUser,Model model) {
+		Object user = userRestService.getUser(idUser);
+		model.addAttribute("user", user);
+		return "profile";
 	}
 }
