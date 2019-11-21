@@ -31,7 +31,7 @@ public class UserRestServiceImpl implements UserRestService{
 	
 
 	@Override
-	public UserModel getUserById(Long id) {
+	public UserModel getUserById(String id) {
 		return userDb.findByIdUser(id);
 	}
 
