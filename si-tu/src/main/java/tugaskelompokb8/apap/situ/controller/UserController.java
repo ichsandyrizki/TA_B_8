@@ -3,6 +3,7 @@ package tugaskelompokb8.apap.situ.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import tugaskelompokb8.apap.situ.model.PasswordModel;
 import tugaskelompokb8.apap.situ.model.UserModel;
 import tugaskelompokb8.apap.situ.repository.UserDb;
+import tugaskelompokb8.apap.situ.service.UserDetailsServiceImpl;
+import tugaskelompokb8.apap.situ.service.UserRestService;
 import tugaskelompokb8.apap.situ.service.UserService;
 
 @Controller
@@ -21,6 +24,8 @@ import tugaskelompokb8.apap.situ.service.UserService;
 public class UserController {
 	@Autowired
 	private UserService userService;
+	private UserRestService userRestService;
+	private UserDetailsServiceImpl userDetailsServiceImpl;
 	
 	@Autowired
 	UserDb userDb;
@@ -29,10 +34,17 @@ public class UserController {
 	private String addUserSubmit(@ModelAttribute UserModel user) {
 		userService.addUser(user);
 		return "index";
+
 	}
-	
-	
-	
+
+	@RequestMapping(value ="/viewUser")
+	private String viewUser(Model model){
+		UserModel user = userService.getUserCurrentLoggedIn();
+		userRestService.getUser(user)
+
+				return "view-user";
+	}
+
 	@RequestMapping(value= "/changePassword", method = RequestMethod.POST)
 	public String changePassSubmit(@ModelAttribute PasswordModel changePassword,
 			Model model) {

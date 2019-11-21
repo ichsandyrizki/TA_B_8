@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <object th:include="fragments/fragment :: header" th:remove="tag"></object>
+    <!--    <object th:include="fragments/fragment :: css" th:remove="tag"></object>-->
+    <!--    <object th:include="fragments/fragment :: js" th:remove="tag"></object>-->
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<!--**********************************
+Main wrapper start
+***********************************-->
+<div id="main-wrapper">
+    <!--**********************************
+        Content body start
+    ***********************************-->
+    <div th:replace="fragments/fragment :: sidebar"></div>
+    <div class="content-body">
+
+        <div class="row page-titles mx-0">
+            <div class="col p-md-0">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">Profle</a></li>
+                    <li class="breadcrumb-item active"><a th:href="@{/}" >Home</a></li>
+                </ol>
+            </div>
+        </div>
+
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Profile</h4>
+                            <div class="basic-form">
+
+                                <form>
+                                    <div class="form-group row">
+                                        <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+                                        <div class="col-sm-10">
+                                            <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
+                                        <div class="col-sm-10">
+                                            <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+                                        </div>
+                                    </div>
+                                    <fieldset class="form-group">
+                                        <div class="row">
+                                            <legend class="col-form-label col-sm-2 pt-0">Radios</legend>
+                                            <div class="col-sm-10">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
+                                                    <label class="form-check-label" for="gridRadios1">
+                                                        First radio
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
+                                                    <label class="form-check-label" for="gridRadios2">
+                                                        Second radio
+                                                    </label>
+                                                </div>
+                                                <div class="form-check disabled">
+                                                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3" disabled>
+                                                    <label class="form-check-label" for="gridRadios3">
+                                                        Third disabled radio
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                    <div class="form-group row">
+                                        <div class="col-sm-2">Checkbox</div>
+                                        <div class="col-sm-10">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="gridCheck1">
+                                                <label class="form-check-label" for="gridCheck1">
+                                                    Example checkbox
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-10">
+                                            <button type="submit" class="btn btn-primary">Sign in</button>
+                                        </div>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    <!--**********************************
+        Content body end
+    ***********************************-->
+
+
+    <!--**********************************
+        Footer start
+    ***********************************-->
+    <div class="footer">
+        <div class="copyright">
+            <p>Copyright &copy; Designed & Developed by <a href="https://themeforest.net/user/quixlab">Quixlab</a> 2018</p>
+        </div>
+    </div>
+    <!--**********************************
+        Footer end
+    ***********************************-->
+</div>
+<!--**********************************
+    Main wrapper end
+***********************************-->
+</body>
+<footer>
+    <nav th:replace="fragments/fragment :: foot"></nav>
+</footer>
+
+</html>
+
+

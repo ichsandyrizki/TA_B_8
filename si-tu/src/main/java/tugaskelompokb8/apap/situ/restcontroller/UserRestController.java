@@ -29,4 +29,5 @@ public class UserRestController {
 	private Object getUserApi(@PathVariable String idUser){
 		return userRestService.getUser(idUser);
 	}
+
 }
