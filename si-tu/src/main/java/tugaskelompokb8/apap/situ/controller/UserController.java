@@ -25,7 +25,6 @@ import tugaskelompokb8.apap.situ.service.UserService;
 public class UserController {
 	@Autowired
 	private UserService userService;
-	private UserRestService userRestService;
 	private UserDetailsServiceImpl userDetailsServiceImpl;
 	
 	@Autowired
