@@ -20,6 +20,8 @@ import tugaskelompokb8.apap.situ.service.UserDetailsServiceImpl;
 import tugaskelompokb8.apap.situ.service.UserRestService;
 import tugaskelompokb8.apap.situ.service.UserService;
 
+import java.math.BigInteger;
+
 @Controller
 @RequestMapping("/user")
 public class UserController {
@@ -71,10 +73,18 @@ public class UserController {
 	}
 	
 	//WEBSERVICE GET USER PROFILE DARI SIVITAS
-	@RequestMapping("/{idUser}")
-	public String getUserProfile(@PathVariable String idUser,Model model) {
-		Object user = userRestService.getUser(idUser);
-		model.addAttribute("user", user);
+    @RequestMapping("/view") //Ini nantinya gimana cara dapetin si idUser encrypted nya ya? yg nge pass siapa, cara nya gimana jir?
+	public String getUserProfile(@PathVariable Model model) {
+	    String idUser = userService.getUserCurrentLoggedIn().getIdUser();
+
+	    if(!idUser.isEmpty()){
+            long roleUser = userService.getUserCurrentLoggedIn().getRole().getIdRole();
+            Object userData = userRestService.getUser(idUser,roleUser);
+            model.addAttribute("user", userData);
+        }else{
+
+        }
+
 		return "profile";
 	}
 }

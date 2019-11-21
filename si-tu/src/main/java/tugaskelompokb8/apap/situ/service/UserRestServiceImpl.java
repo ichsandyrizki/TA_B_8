@@ -38,9 +38,17 @@ public class UserRestServiceImpl implements UserRestService{
 	static RestTemplate restTemplate = new RestTemplate();
 	
 	@Override
-    public Object getUser(String idUser) {
-        ResponseEntity<Object> user = restTemplate.getForEntity(Setting.userURL +  idUser, Object.class);
-        return user.getBody();
+    public Object getUser(String idUser, long idRole) {
+		if(idRole == 3){
+			ResponseEntity<Object> guru = restTemplate.getForEntity(Setting.guruURL +  idUser, Object.class);
+			return guru.getBody();
+		} else if (idRole == 4){
+			ResponseEntity<Object> siswa = restTemplate.getForEntity(Setting.siswaURL +  idUser, Object.class);
+			return siswa.getBody();
+		} else {
+			ResponseEntity<Object> pegawai = restTemplate.getForEntity(Setting.pegawaiURL +  idUser, Object.class);
+			return pegawai.getBody();
+		}
     }
 	
 }

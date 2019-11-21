@@ -6,5 +6,5 @@ import tugaskelompokb8.apap.situ.rest.UserDetail;
 
 public interface UserRestService {
 	UserModel getUserById(String id);
-	Object getUser(String idUser);
+	Object getUser(String idUser, long idRole);
 }
