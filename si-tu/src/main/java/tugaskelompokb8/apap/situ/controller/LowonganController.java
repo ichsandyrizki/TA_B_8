@@ -37,7 +37,7 @@ public class LowonganController {
     }
 
     @RequestMapping(value = "/lowongan/add", method = RequestMethod.POST)
-    private String addPengajuanSuratSubmit(@ModelAttribute LowonganModel lowongan, Model model){
+    private String addLowonganSubmit(@ModelAttribute LowonganModel lowongan, Model model){
         lowongan.setUser(userService.getUserCurrentLoggedIn());
         List<LowonganModel> listLowongan = lowonganService.getLowonganList();
         model.addAttribute("listLowongan", listLowongan);
