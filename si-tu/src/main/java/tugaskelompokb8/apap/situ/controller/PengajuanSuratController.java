@@ -63,6 +63,8 @@ public class PengajuanSuratController {
 
     @RequestMapping("/pengajuanSurat/statuses")
     public String pengajuanViewAll(Model model){
+
+
         List<PengajuanSuratModel> pengajuanSuratModelList = pengajuanSuratService.getPengajuanSuratList();
 
         model.addAttribute("pengajuan_list",pengajuanSuratModelList);

@@ -15,4 +15,6 @@ public interface PengajuanSuratService {
     String createNomor(PengajuanSuratModel model);
     List<String> getAllNomor();
     PengajuanSuratModel updatePengajuan(PengajuanSuratModel model);
+    boolean getStatusKepsek(PengajuanSuratModel model);
+    boolean getStatusAdmin(PengajuanSuratModel model);
 }

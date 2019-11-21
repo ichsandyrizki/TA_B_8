@@ -84,4 +84,20 @@ public class PengajuanSuratServiceImpl implements PengajuanSuratService {
         return modelFromDb;
     }
 
+    @Override
+    public boolean getStatusKepsek(PengajuanSuratModel model){
+        if(model.getStatus() == 0){
+            return true;
+        }
+        return false;
+     }
+
+    @Override
+    public boolean getStatusAdmin(PengajuanSuratModel model){
+        if(model.getStatus() == 2){
+            return true;
+        }
+        return false;
+    }
+
 }
