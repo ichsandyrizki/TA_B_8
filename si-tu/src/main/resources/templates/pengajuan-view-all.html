@@ -56,14 +56,14 @@ Main wrapper start
                                         <p th:case="4">Selesai</p>
                                     </td>
                                     <td>
-                                        <div class="btn">
+                                        <div th:if="${pengajuanSurat.status == '2'}" class="btn">
                                             <button class="btn btn-sm btn-danger">
                                                 <a th:href="@{/pengajuanSurat/delete/}+${pengajuanSurat.idPengajuanSurat}" style="color:white" method="POST">Hapus</a>
                                             </button>
                                         </div>
                                     </td>
                                     <td>
-                                        <div class="btn">
+                                        <div th:if="${pengajuanSurat.status == '2'}" class="btn">
                                             <button class="btn btn-primary">
                                                 <a th:href="@{/pengajuanSurat/update/}+${pengajuanSurat.idPengajuanSurat}" style="color:white" method="POST">Update</a>
                                             </button>
@@ -156,7 +156,7 @@ Main wrapper start
                                             <p th:case="4">Selesai</p>
                                         </td>
                                         <td>
-                                            <div class="btn">
+                                            <div th:if class="btn">
                                                 <button class="btn btn-sm btn-danger">
                                                     <a th:href="@{/pengajuanSurat/delete/}+${pengajuanSurat.idPengajuanSurat}" style="color:white" method="POST">Hapus</a>
                                                 </button>

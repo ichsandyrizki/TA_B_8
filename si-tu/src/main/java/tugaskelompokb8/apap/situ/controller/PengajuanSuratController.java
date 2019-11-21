@@ -1,5 +1,6 @@
 package tugaskelompokb8.apap.situ.controller;
 
+import org.springframework.security.web.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +14,9 @@ import tugaskelompokb8.apap.situ.service.JenisSuratService;
 import tugaskelompokb8.apap.situ.service.PengajuanSuratService;
 import tugaskelompokb8.apap.situ.service.UserService;
 
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
@@ -69,20 +73,36 @@ public class PengajuanSuratController {
 
         model.addAttribute("pengajuan_list",pengajuanSuratModelList);
 
-        return "form-pengajuan-surat";
+        return "pengajuan-view-all";
     }
 
 
     @RequestMapping(value = "/pengajuanSurat/update/{idPengajuanSurat}",method = RequestMethod.GET)
     public String updatePengajuanSuratFormPage(
             Model model,
+//            HttpServletRequest request, HttpSession session,
             @PathVariable(value="idPengajuanSurat") Long idPengajuanSurat
     ){
         PengajuanSuratModel pengajuanSuratModel = pengajuanSuratService.getPengajuanById(idPengajuanSurat).get();
-
+//        if (request.isUserInRole("Kepala Sekolah")){
+//            if (pengajuanSuratModel.getStatus()==0){
+//                model.addAttribute("pengajuanSurat", pengajuanSuratModel);
+//                return "pengajuan-update-mk2";
+//            }else {
+//                return "404";
+//            }
+//        }
+//        else {
+//            if (pengajuanSuratModel.getStatus()== 2){
+//                model.addAttribute("pengajuanSurat", pengajuanSuratModel);
+//                return "pengajuan-update-mk2";
+//            }else {
+//                return "404";
+//            }
+//        }
         model.addAttribute("pengajuanSurat", pengajuanSuratModel);
 
-        return "pengajuan-update";
+        return "pengajuan-update-mk2";
     }
 
     @RequestMapping(value = "/pengajuanSurat/update/{idPengajuanSurat}",method = RequestMethod.POST)
