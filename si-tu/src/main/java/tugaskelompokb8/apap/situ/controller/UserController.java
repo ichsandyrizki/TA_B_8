@@ -54,9 +54,7 @@ public class UserController {
 		model.addAttribute("listRole", roleDb.findAll());
 		return "form-add-user";
 	}
-	
-	@Autowired
-	UserRestService userRestService;
+
 	
 	@RequestMapping(value = "/addUser", method = RequestMethod.POST)
 	private String addUserSubmit(@ModelAttribute @Valid UserSivitasModel userSivitas,
@@ -111,12 +109,5 @@ public class UserController {
 			return "index";
 		}
 	}
-	
-	//WEBSERVICE GET USER PROFILE DARI SIVITAS
-	@RequestMapping("/{idUser}")
-	public String getUserProfile(@PathVariable String idUser,Model model) {
-		Object user = userRestService.getUser(idUser);
-		model.addAttribute("user", user);
-		return "profile";
-	}
+
 }
