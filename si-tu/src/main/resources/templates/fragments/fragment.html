@@ -99,8 +99,8 @@
                                     <li>
                                         <a href="app-profile.html"><i class="icon-user"></i> <span>Profile</span></a>
                                     </li>
-                                    <li>
-                                        <a th:href="@{/addUser}"><i class="icon-user"></i> <span>Add New User</span></a>
+                                    <li th:if="${isAdmin}">
+                                        <a th:href="@{/user/addUser}"><i class="icon-user"></i> <span>Add New User</span></a>
                                     </li>
                                     <hr class="my-2">
                                     <li><a th:href="@{/logout}"><i class="icon-key"></i> <span>Logout</span></a></li>

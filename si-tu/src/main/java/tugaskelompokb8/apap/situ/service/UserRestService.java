@@ -1,10 +1,12 @@
 package tugaskelompokb8.apap.situ.service;
 
 import reactor.core.publisher.Mono;
-import tugaskelompokb8.apap.situ.model.UserModel;
-import tugaskelompokb8.apap.situ.rest.UserDetail;
+import tugaskelompokb8.apap.situ.rest.BaseRest;
+import tugaskelompokb8.apap.situ.rest.UserSivitasList;
+import tugaskelompokb8.apap.situ.rest.UserSivitasModel;
+
+import java.util.List;
 
 public interface UserRestService {
-	UserModel getUserById(String id);
-	Object getUser(String idUser);
+    Mono<BaseRest> registerUser (UserSivitasModel userSivitasModel);
 }
