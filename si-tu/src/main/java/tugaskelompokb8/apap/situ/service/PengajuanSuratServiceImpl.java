@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tugaskelompokb8.apap.situ.model.JenisSuratModel;
 import tugaskelompokb8.apap.situ.model.PengajuanSuratModel;
+import tugaskelompokb8.apap.situ.model.UserModel;
 import tugaskelompokb8.apap.situ.repository.PengajuanSuratDb;
 
 import java.text.DateFormat;
@@ -82,6 +83,27 @@ public class PengajuanSuratServiceImpl implements PengajuanSuratService {
         modelFromDb.setNomorSurat(createNomor(model));
         pengajuanSuratDb.save(modelFromDb);
         return modelFromDb;
+    }
+
+    @Override
+    public boolean getStatusKepsek(PengajuanSuratModel model){
+        if(model.getStatus() == 0){
+            return true;
+        }
+        return false;
+     }
+
+    @Override
+    public boolean getStatusAdmin(PengajuanSuratModel model){
+        if(model.getStatus() == 2){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public List<PengajuanSuratModel> getPengajuanByUser(UserModel user){
+        return (List<PengajuanSuratModel>) pengajuanSuratDb.findByUser(user);
     }
 
 }
