@@ -6,13 +6,14 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 import tugaskelompokb8.apap.situ.model.LowonganModel;
 import tugaskelompokb8.apap.situ.repository.LowonganDb;
+import tugaskelompokb8.apap.situ.rest.BaseResponse;
+import tugaskelompokb8.apap.situ.rest.BaseRest;
 import tugaskelompokb8.apap.situ.rest.Setting;
 import tugaskelompokb8.apap.situ.rest.UserPerpusDetail;
 
 import javax.transaction.Transactional;
 
 @Service
-@Transactional
 public class LowonganRestServiceImpl implements LowonganRestService {
 
     private final WebClient webClient;
@@ -45,10 +46,16 @@ public class LowonganRestServiceImpl implements LowonganRestService {
         this.webClient = webClientBuilder.baseUrl(Setting.userPerpusURL).build();
     }
     @Override
-    public Mono<UserPerpusDetail> getUser(String role){
-        return this.webClient.get().uri("/rest/user/"+role)
-                .retrieve().bodyToMono(UserPerpusDetail.class);
+    public Mono<BaseResponse> getAllUser(){
+            String uri = "/api/user/all";
+            return this.webClient
+                    .get()
+                    .uri(uri)
+                    .retrieve()
+                    .bodyToMono(BaseResponse.class);
     }
 
 
 }
+
+

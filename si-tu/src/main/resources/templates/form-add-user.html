@@ -35,6 +35,9 @@ Main wrapper start
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">Tambah user</h4>
+                            <div th:if="${userIsExist} == true" class="alert alert-danger" role="alert">
+                                <b>Username sudah terdaftar</b>
+                            </div>
                             <div class="basic-form">
                                 <form th:action="@{/user/addUser}" th:object="${user}" method="POST">
                                     <input th:field="${user.idUSer}" type="hidden">
@@ -86,7 +89,7 @@ Main wrapper start
     ***********************************-->
     <div class="footer">
         <div class="copyright">
-            <p>Copyright &copy; Designed & Developed by <a href="https://themeforest.net/user/quixlab">Quixlab</a> 2018</p>
+            <p>Copyright &copy; Designed & Developed by <a href="https://github.com/ichsandyrizki/TA_B_8">APAP Kelompok B8 SITU</a> 2019</p>
         </div>
     </div>
     <!--**********************************

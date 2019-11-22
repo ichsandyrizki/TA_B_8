@@ -8,12 +8,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import reactor.core.publisher.Mono;
 import tugaskelompokb8.apap.situ.model.PasswordModel;
 import tugaskelompokb8.apap.situ.model.UserModel;
@@ -48,7 +46,8 @@ public class UserController {
     @Autowired
     private UserRestService userRestService;
 
-    @RequestMapping("/addUser")
+
+	@RequestMapping("/addUser")
 	private String addUser(@RequestParam(value = "userIsExist", required=false) boolean cassieyah, Model model) {
 		UserSivitasModel userSivitasModel = new UserSivitasModel();
 		if(userService.getUserCurrentLoggedIn().getRole().equals("Admin TU")){

@@ -50,10 +50,10 @@ public class LowonganRestController {
         return restTemplate.getForObject(url, String.class);
     }
 
-    @GetMapping("/user/{role}/role")
-    private Mono<UserPerpusDetail> getUser(@PathVariable String role){
-        return lowonganRestService.getUser(role);
-    }
+//    @GetMapping("/user/{role}/role")
+//    private Mono<UserPerpusDetail> getUser(@PathVariable String role){
+//        return lowonganRestService.getUser(role);
+//    }
 
 
     @Bean

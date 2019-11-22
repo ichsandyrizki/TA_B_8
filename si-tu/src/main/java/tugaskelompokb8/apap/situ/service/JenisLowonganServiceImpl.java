@@ -21,6 +21,12 @@ public class JenisLowonganServiceImpl implements JenisLowonganService {
     }
 
     @Override
+    public JenisLowonganModel getJenisByNama(String nama) {
+        return jenisLowonganDb.findByNama(nama).get();
+    }
+
+
+    @Override
     public boolean addJenisLowongan(JenisLowonganModel jenisLowongan) {
         List<JenisLowonganModel> listLowongan = jenisLowonganDb.findAll();
         for(int i = 0; i < jenisLowonganDb.findAll().size(); i++){

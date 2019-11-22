@@ -30,27 +30,27 @@ public class UserModel implements Serializable{
 	@GeneratedValue(generator = "system-uuid")
 	@GenericGenerator(name = "system-uuid", strategy = "uuid")
 	private String idUser;
-	
+
 	@NotNull
 	@Size(max=50)
 	@Column(name="username", nullable = false)
 	private String username;
-	
+
 	@NotNull
 	@Lob
 	@Column(name="password", nullable = false)
 	private String password;
-	
+
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_role", referencedColumnName = "idRole", nullable = false)
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JsonIgnore
 	private RoleModel role;
-	
+
 	@OneToMany(mappedBy = "user", fetch=FetchType.LAZY, cascade = CascadeType.ALL)
 	@JsonIgnore
 	private List<PengajuanSuratModel> listPengajuanSurat;
-	
+
 	@OneToMany(mappedBy = "user", fetch=FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<LowonganModel> listLowongan;
 
