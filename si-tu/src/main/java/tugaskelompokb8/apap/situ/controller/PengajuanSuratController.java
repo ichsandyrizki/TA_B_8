@@ -41,22 +41,32 @@ public class PengajuanSuratController {
     }
 
     @RequestMapping(value = "/pengajuanSurat/add", method = RequestMethod.POST, params={"submit"})
-    private String addPengajuanSuratSubmit(@ModelAttribute PengajuanSuratModel surat){
+    private String addPengajuanSuratSubmit(@ModelAttribute PengajuanSuratModel surat, Model model){
         surat.setTanggalDisetujui(null);
         surat.setStatus(0);
         surat.setNomorSurat("0");
         surat.setUser(userService.getUserCurrentLoggedIn());
         surat.setTanggalPengajuan(Date.valueOf(LocalDate.now()));
+        List<JenisSuratModel> listJenisSurat = jenisSuratService.getJenisSuratList();
+        List<PengajuanSuratModel> pengajuanSuratModelList = pengajuanSuratService.getPengajuanSuratList();
         pengajuanSuratService.addPengajuanSurat(surat);
+        model.addAttribute("surat", surat);
+        model.addAttribute("listJenisSurat", listJenisSurat);
+        model.addAttribute("pengajuan_list", pengajuanSuratModelList);
         return "form-pengajuan-surat";
     }
 
     @RequestMapping(value = "/pengajuanSurat/delete/{idSurat}")
     public String deleteStore(
-            @PathVariable(value="idSurat") Long idSurat,
+            @PathVariable(value="idSurat") Long idSurat, @ModelAttribute PengajuanSuratModel surat,
             Model model
     ){
         pengajuanSuratService.deletePengajuanSurat(idSurat);
+        List<JenisSuratModel> listJenisSurat = jenisSuratService.getJenisSuratList();
+        List<PengajuanSuratModel> pengajuanSuratModelList = pengajuanSuratService.getPengajuanSuratList();
+        model.addAttribute("pengajuan_list",pengajuanSuratModelList);
+        model.addAttribute("listJenisSurat", listJenisSurat);
+        model.addAttribute("surat",surat);
 
         return "form-pengajuan-surat";
     }
