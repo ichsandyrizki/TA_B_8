@@ -1,5 +1,6 @@
 package tugaskelompokb8.apap.situ.security;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,16 +16,15 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-	@Override
+    @Override
     protected void configure(HttpSecurity htpp) throws Exception {
         htpp
-        		.csrf().disable()        
-        		.authorizeRequests()
+                .csrf().disable()
+                .authorizeRequests()
                 .antMatchers("/css/**").permitAll()
                 .antMatchers("/js/**").permitAll()
                 .antMatchers("/changePassword").permitAll()
-                .antMatchers("/pengajuanSurat/statuses").hasAnyAuthority("Admin TU","Guru","Siswa")
-                .antMatchers("/pengajuanSurat/update/{idPengajuanSurat}").hasAnyAuthority("Admin TU", "Kepala Sekolah")
+                .antMatchers("/user/addUser").hasAnyAuthority("Admin TU")
 //                .anyRequest().authenticated()
                 .anyRequest().permitAll()
                 .and()
@@ -40,20 +40,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-   @Autowired
-   public void configureGlobal (AuthenticationManagerBuilder auth) throws Exception {
-       auth.inMemoryAuthentication()
-               .passwordEncoder(encoder())
-               .withUser("sandi").password(encoder().encode("bhirama"))
-               .roles("Kepala Sekolah");
-   }
+//   @Autowired
+//   public void configureGlobal (AuthenticationManagerBuilder auth) throws Exception {
+//       auth.inMemoryAuthentication()
+//               .passwordEncoder(encoder())
+//               .withUser("sandi").password(encoder().encode("bhirama"))
+//               .roles("Kepala Sekolah");
+//   }
 
-  @Autowired
-  private UserDetailsService userDetailsService;
+    @Autowired
+    private UserDetailsService userDetailsService;
 
-  @Autowired
-  public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception{
-      auth.userDetailsService(userDetailsService).passwordEncoder(encoder());
-  }
+    @Autowired
+    public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception{
+        auth.userDetailsService(userDetailsService).passwordEncoder(encoder());
+    }
 
 }

@@ -1,6 +1,7 @@
 package tugaskelompokb8.apap.situ.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,31 +12,27 @@ import tugaskelompokb8.apap.situ.model.PasswordModel;
 import tugaskelompokb8.apap.situ.repository.PengajuanSuratDb;
 import tugaskelompokb8.apap.situ.repository.RoleDb;
 import tugaskelompokb8.apap.situ.repository.UserDb;
+import tugaskelompokb8.apap.situ.service.UserService;
 
 @Controller
 public class PageController {
+    @Qualifier("userServiceImpl")
 
 	@Autowired
-	RoleDb roleDb;
-
-	@Autowired
-    UserDb userDb;
-
-	@Autowired
-    PengajuanSuratDb pengajuanSuratDb;
+    UserService userService;
 	
     @RequestMapping("/")
     private String home(Model model){
-        model.addAttribute("jmlUser", userDb.findAll().size());
-        model.addAttribute("jmlSurat", pengajuanSuratDb.findAll().size());
+        if(userService.getUserCurrentLoggedIn().getRole().getNama().equals("Admin TU")){
+            model.addAttribute("isAdmin", true);
+        }else{
+            model.addAttribute("isAdmin", false);
+        }
+        model.addAttribute("jmlUser", userService.getListUser().size());
+        model.addAttribute("jmlSurat", 0);
         model.addAttribute("jmlLowongan",0);
+
         return "index";
-    }
-    
-    @RequestMapping("/addUser")
-    private String addUser(Model model) {
-    	model.addAttribute("listRole", roleDb.findAll());
-    	return "add-user";
     }
     
     @RequestMapping("/login")

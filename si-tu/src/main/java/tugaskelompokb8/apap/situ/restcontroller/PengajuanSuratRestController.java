@@ -42,13 +42,15 @@ public class PengajuanSuratRestController {
 	@Autowired
 	UserDb userDb;
 	
-	@GetMapping(value="pengajuanSurat/ruangan")
-	public BaseResponse<List<PengajuanSuratDetail>> retrievePengajuanSurat() {
+
+	
+	@GetMapping(value="pengajuanSurat/{idPengajuan}")
+	public BaseResponse<PengajuanSuratDetail> retrievePengajuanSurat(@PathVariable (value="idPengajuan") Long idPengajuan) {
 		try {
-			BaseResponse<List<PengajuanSuratDetail>> response = new BaseResponse<>();
+			BaseResponse<PengajuanSuratDetail> response = new BaseResponse<>();
 			response.setMessage("success");
 			response.setStatus(200);
-			response.setResult(pengajuanSuratRestService.getAllPengajuanSuratRuangan());
+			response.setResult(pengajuanSuratRestService.getPengajuanSuratById(idPengajuan));
 			
 			return response;
 		}
