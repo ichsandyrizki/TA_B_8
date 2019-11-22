@@ -58,10 +58,15 @@ public class PengajuanSuratController {
 
     @RequestMapping(value = "/pengajuanSurat/delete/{idSurat}")
     public String deleteStore(
-            @PathVariable(value="idSurat") Long idSurat,
+            @PathVariable(value="idSurat") Long idSurat, @ModelAttribute PengajuanSuratModel surat,
             Model model
     ){
         pengajuanSuratService.deletePengajuanSurat(idSurat);
+        List<JenisSuratModel> listJenisSurat = jenisSuratService.getJenisSuratList();
+        List<PengajuanSuratModel> pengajuanSuratModelList = pengajuanSuratService.getPengajuanSuratList();
+        model.addAttribute("pengajuan_list",pengajuanSuratModelList);
+        model.addAttribute("listJenisSurat", listJenisSurat);
+        model.addAttribute("surat",surat);
 
         return "form-pengajuan-surat";
     }
