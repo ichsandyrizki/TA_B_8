@@ -133,6 +133,8 @@ public class UserController {
         @RequestMapping("/view")
         public String getUserProfile (Model model) throws ParseException {
             UserModel user = userService.getUserCurrentLoggedIn();
+            model.addAttribute("jmlLowongan", user.getListLowongan().size());
+            model.addAttribute("jmlSurat", user.getListPengajuanSurat().size());
             model.addAttribute("role" ,user.getRole());
             model.addAttribute("username", user.getUsername());
 
