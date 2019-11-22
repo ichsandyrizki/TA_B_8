@@ -23,5 +23,5 @@ public class UserRestController {
 	@Qualifier("userRestServiceImpl")
 	@Autowired
 	UserRestService userRestService;
-	
+
 }
