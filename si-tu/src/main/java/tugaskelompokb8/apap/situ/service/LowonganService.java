@@ -7,4 +7,5 @@ import java.util.List;
 public interface LowonganService {
     List<LowonganModel> getLowonganList();
     void addLowongan (LowonganModel lowonganModel);
+    LowonganModel changeLowongan(LowonganModel lowongan, Long idLowongan);
 }
