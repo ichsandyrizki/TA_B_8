@@ -65,7 +65,7 @@ public class UserController {
 		userSivitas.setIdUSer(user.getIdUser());
 
 		Mono<BaseRest> api = null;
-		if(roleDb.findByIdRole(userSivitas.getIdRole()).getNama().equals("Admin Tu")||
+		if(roleDb.findByIdRole(userSivitas.getIdRole()).getNama().equals("Admin TU")||
 				roleDb.findByIdRole(userSivitas.getIdRole()).getNama().equals("Kepala Sekolah")||
 				roleDb.findByIdRole(userSivitas.getIdRole()).getNama().equals("Guru")||
 				roleDb.findByIdRole(userSivitas.getIdRole()).getNama().equals("Siswa")){
