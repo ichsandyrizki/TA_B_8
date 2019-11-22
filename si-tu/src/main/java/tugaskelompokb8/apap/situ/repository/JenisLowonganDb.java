@@ -10,4 +10,5 @@ import java.util.Optional;
 @Repository
 public interface JenisLowonganDb extends JpaRepository<JenisLowonganModel, Long> {
     Optional<JenisLowonganModel> findByIdJenisLowongan(Long id);
+    Optional<JenisLowonganModel> findByNama(String nama);
 }
