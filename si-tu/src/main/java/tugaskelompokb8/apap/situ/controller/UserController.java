@@ -13,14 +13,21 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import reactor.core.publisher.Mono;
 import tugaskelompokb8.apap.situ.model.PasswordModel;
 import tugaskelompokb8.apap.situ.model.UserModel;
 import tugaskelompokb8.apap.situ.repository.UserDb;
+import tugaskelompokb8.apap.situ.rest.BaseResponse;
+import tugaskelompokb8.apap.situ.rest.UserSivitasModel;
 import tugaskelompokb8.apap.situ.service.UserDetailsServiceImpl;
 import tugaskelompokb8.apap.situ.service.UserRestService;
 import tugaskelompokb8.apap.situ.service.UserService;
 
 import java.math.BigInteger;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.LinkedHashMap;
+import java.util.Objects;
 
 @Controller
 @RequestMapping("/user")
@@ -31,7 +38,7 @@ public class UserController {
 	
 	@Autowired
 	UserDb userDb;
-	
+
 	@Autowired
 	UserRestService userRestService;
 	
@@ -73,18 +80,33 @@ public class UserController {
 	}
 	
 	//WEBSERVICE GET USER PROFILE DARI SIVITAS
-    @RequestMapping("/view") //Ini nantinya gimana cara dapetin si idUser encrypted nya ya? yg nge pass siapa, cara nya gimana jir?
-	public String getUserProfile(@PathVariable Model model) {
-	    String idUser = userService.getUserCurrentLoggedIn().getIdUser();
-
-	    if(!idUser.isEmpty()){
-            long roleUser = userService.getUserCurrentLoggedIn().getRole().getIdRole();
-            Object userData = userRestService.getUser(idUser,roleUser);
-            model.addAttribute("user", userData);
-        }else{
-
-        }
-
+    @RequestMapping("/view")
+	public String getUserProfile(Model model) throws ParseException {
+	    UserModel user = userService.getUserCurrentLoggedIn();
+	    System.out.println(user.getRole().getIdRole() +"  " +user.getIdUser());
+	    if (user.getRole().getIdRole() < 5){
+			System.out.println("masuk ke if < 5");
+			UserSivitasModel userModel = new UserSivitasModel();
+			Mono<BaseResponse> respon = userRestService.getUserData(user.getIdUser(), user.getRole().getIdRole());
+			LinkedHashMap<String ,String> data = (LinkedHashMap<String , String>) Objects.requireNonNull(respon.block()).getResult();
+			String tanggal = data.get("tanggalLahir");
+			userModel.setNama(data.get("nama"));
+			userModel.setAlamat(data.get("alamat"));
+			if(user.getRole().getIdRole() == 4){
+				userModel.setNi("nis");
+			}else if(user.getRole().getIdRole() == 2){
+				userModel.setNi("nip");
+			} else {
+				userModel.setNi("nig");
+			}
+			userModel.setTanggalLahir(new SimpleDateFormat("yyyy-MM-dd").parse(tanggal));
+			userModel.setTempatLahir(data.get("tempatLahir"));
+			userModel.setTelepon(data.get("telepon"));
+			model.addAttribute("user", userModel);
+	    } else {
+			System.out.println("masuk ke if > 4");
+	    	model.addAttribute("user", user);
+		}
 		return "profile";
 	}
 }
