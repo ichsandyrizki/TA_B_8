@@ -7,6 +7,7 @@ import tugaskelompokb8.apap.situ.model.JenisSuratModel;
 import tugaskelompokb8.apap.situ.model.PengajuanSuratModel;
 import tugaskelompokb8.apap.situ.model.UserModel;
 import tugaskelompokb8.apap.situ.repository.PengajuanSuratDb;
+import tugaskelompokb8.apap.situ.repository.UserDb;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -20,6 +21,9 @@ import java.util.Optional;
 public class PengajuanSuratServiceImpl implements PengajuanSuratService {
     @Autowired
     PengajuanSuratDb pengajuanSuratDb;
+
+    @Autowired
+    UserDb userDb;
 
     @Override
     public void addPengajuanSurat(PengajuanSuratModel surat){
@@ -102,8 +106,16 @@ public class PengajuanSuratServiceImpl implements PengajuanSuratService {
     }
 
     @Override
-    public List<PengajuanSuratModel> getPengajuanByUser(UserModel user){
-        return (List<PengajuanSuratModel>) pengajuanSuratDb.findByUser(user);
+    public List<PengajuanSuratModel> findPengajuanByUser(UserModel user){
+        UserModel modelFromDb = userDb.findByIdUser(user.getIdUser());
+        List<PengajuanSuratModel> listPengajuan = pengajuanSuratDb.findAll();
+        List<PengajuanSuratModel> listSama = new ArrayList<>();
+        for(PengajuanSuratModel model : listPengajuan){
+            if (model.getUser() == modelFromDb){
+                listSama.add(model);
+            }
+        }
+        return listSama;
     }
 
 }
