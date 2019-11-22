@@ -10,4 +10,5 @@ public interface LowonganService {
     LowonganModel changeLowongan(LowonganModel lowongan, Long idLowongan);
     LowonganModel getLowonganByJudul(String judul);
     void createLowonganPustakawan();
+    void createLowongan(int jumlah);
 }

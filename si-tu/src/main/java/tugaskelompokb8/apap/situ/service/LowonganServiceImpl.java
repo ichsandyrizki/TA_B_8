@@ -78,18 +78,34 @@ public class LowonganServiceImpl implements LowonganService {
             }
         }
         System.out.println(count);
-        if(count <=5){
+        if(count <5){
             if(lowonganService.getLowonganByJudul("Lowongan Pustakawan") == null){
-                LowonganModel lowonganPustakawan = new LowonganModel();
-                lowonganPustakawan.setUser(userService.getUserCurrentLoggedIn());
-                lowonganPustakawan.setJumlah(5 - count);
-                lowonganPustakawan.setKeterangan("Dibutuhkan Pustakawan Cakap");
-                lowonganPustakawan.setJudul("Lowongan Pustakawan");
-                lowonganPustakawan.setTanggalDibuka(Date.valueOf(LocalDate.now()));
-                lowonganPustakawan.setTanggalDitutup(Date.valueOf(LocalDate.now().plusMonths(1)));
-                lowonganPustakawan.setJenisLowongan(jenisLowonganService.getJenisByNama(("pustakawan").toLowerCase()));
-                lowonganService.addLowongan(lowonganPustakawan);
+                createLowongan(count);
+            } else if(lowonganService.getLowonganByJudul("Lowongan Pustakawan") != null){
+                LowonganModel siLowongan = lowonganService.getLowonganByJudul("Lowongan Pustakawan");
+                if(!siLowongan.getJumlah().equals(count)){
+                    siLowongan.setJumlah(5 - count);
+                    lowonganDb.save(siLowongan);
+                }
+            }
+        } else{
+            if(lowonganService.getLowonganByJudul("Lowongan Pustakawan") != null){
+                LowonganModel siLowongan = lowonganService.getLowonganByJudul("Lowongan Pustakawan");
+                lowonganDb.delete(siLowongan);
             }
         }
+    }
+
+    @Override
+    public void createLowongan(int jumlah){
+        LowonganModel lowonganPustakawan = new LowonganModel();
+        lowonganPustakawan.setUser(userService.getUserCurrentLoggedIn());
+        lowonganPustakawan.setJumlah(5 - jumlah);
+        lowonganPustakawan.setKeterangan("Dibutuhkan Pustakawan Cakap");
+        lowonganPustakawan.setJudul("Lowongan Pustakawan");
+        lowonganPustakawan.setTanggalDibuka(Date.valueOf(LocalDate.now()));
+        lowonganPustakawan.setTanggalDitutup(Date.valueOf(LocalDate.now().plusMonths(1)));
+        lowonganPustakawan.setJenisLowongan(jenisLowonganService.getJenisByNama(("pustakawan").toLowerCase()));
+        lowonganService.addLowongan(lowonganPustakawan);
     }
 }
