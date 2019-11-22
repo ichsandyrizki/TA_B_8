@@ -7,5 +7,6 @@ import tugaskelompokb8.apap.situ.model.LowonganModel;
 
 @Repository
 public interface LowonganDb extends JpaRepository<LowonganModel, Long> {
+    LowonganModel findByIdLowongan(Long id);
 
 }
