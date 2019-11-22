@@ -97,7 +97,7 @@
                             <div class="dropdown-content-body">
                                 <ul>
                                     <li>
-                                        <a href="app-profile.html"><i class="icon-user"></i> <span>Profile</span></a>
+                                        <a th:href="@{/user/view}"><i class="icon-user"></i> <span>Profile</span></a>
                                     </li>
                                     <li th:if="${isAdmin}">
                                         <a th:href="@{/user/addUser}"><i class="icon-user"></i> <span>Add New User</span></a>

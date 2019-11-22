@@ -24,4 +24,5 @@ public class UserRestController {
 	@Autowired
 	UserRestService userRestService;
 
+
 }

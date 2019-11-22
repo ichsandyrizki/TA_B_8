@@ -17,28 +17,35 @@ import tugaskelompokb8.apap.situ.model.PasswordModel;
 import tugaskelompokb8.apap.situ.model.UserModel;
 import tugaskelompokb8.apap.situ.repository.RoleDb;
 import tugaskelompokb8.apap.situ.repository.UserDb;
+import tugaskelompokb8.apap.situ.rest.BaseResponse;
 import tugaskelompokb8.apap.situ.rest.BaseRest;
 import tugaskelompokb8.apap.situ.rest.UserSivitasModel;
+import tugaskelompokb8.apap.situ.service.UserDetailsServiceImpl;
 import tugaskelompokb8.apap.situ.service.UserRestService;
 import tugaskelompokb8.apap.situ.service.UserService;
 
 import javax.validation.Valid;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.LinkedHashMap;
 import java.util.Objects;
 
 @Controller
 @RequestMapping("/user")
 public class UserController {
-	@Autowired
-	private UserService userService;
-	
-	@Autowired
-	UserDb userDb;
+    @Autowired
+    private UserService userService;
+    private UserDetailsServiceImpl userDetailsServiceImpl;
 
-	@Autowired
-	RoleDb roleDb;
+    @Autowired
+    UserDb userDb;
 
-	@Autowired
-	private UserRestService userRestService;
+    @Autowired
+    RoleDb roleDb;
+
+    @Autowired
+    private UserRestService userRestService;
+
 
 	@RequestMapping("/addUser")
 	private String addUser(@RequestParam(value = "userIsExist", required=false) boolean cassieyah, Model model) {
@@ -121,4 +128,39 @@ public class UserController {
 		}
 	}
 
-}
+
+        //WEBSERVICE GET USER PROFILE DARI SIVITAS
+        @RequestMapping("/view")
+        public String getUserProfile (Model model) throws ParseException {
+            UserModel user = userService.getUserCurrentLoggedIn();
+            model.addAttribute("role" ,user.getRole());
+            model.addAttribute("username", user.getUsername());
+
+            if (user.getRole().getIdRole() < 5) {
+
+                UserSivitasModel userModel = new UserSivitasModel();
+                Mono<BaseResponse> respon = userRestService.getUserData(user.getIdUser(), user.getRole().getIdRole());
+                LinkedHashMap<String, String> data = (LinkedHashMap<String, String>) Objects.requireNonNull(respon.block()).getResult();
+
+                userModel.setIdRole(user.getRole().getIdRole());
+                userModel.setUsername(user.getUsername());
+                userModel.setNama(data.get("nama"));
+                userModel.setAlamat(data.get("alamat"));
+                if (user.getRole().getIdRole() == 4) {
+                    userModel.setNi(data.get("nis"));
+                } else if (user.getRole().getIdRole() == 2) {
+                    userModel.setNi(data.get("nip"));
+                } else {
+                    userModel.setNi(data.get("nig"));
+                }
+                String tanggal = data.get("tanggalLahir");
+                userModel.setTanggalLahir(new SimpleDateFormat("yyyy-MM-dd").parse(tanggal));
+                userModel.setTempatLahir(data.get("tempatLahir"));
+                userModel.setTelepon(data.get("telepon"));
+                model.addAttribute("user", userModel);
+            }
+            return "profile";
+        }
+
+    }
+

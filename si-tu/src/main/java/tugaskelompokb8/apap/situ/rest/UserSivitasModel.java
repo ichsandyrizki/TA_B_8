@@ -54,6 +54,10 @@ public class UserSivitasModel implements Serializable{
     private String alamat;
 
     @NotNull
+    @Column(name="ni", nullable = false)
+    private String ni;
+
+    @NotNull
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name="tanggalLahir", nullable = false)
     private Date tanggalLahir;
@@ -69,6 +73,14 @@ public class UserSivitasModel implements Serializable{
     @NotNull
     @Column(name="role", nullable = false)
     private long idRole;
+
+    public String getNi() {
+        return ni;
+    }
+
+    public void setNi(String ni) {
+        this.ni = ni;
+    }
 
     public String getIdUSer() {
         return idUSer;
@@ -146,5 +158,5 @@ public class UserSivitasModel implements Serializable{
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         return dateFormat.format(tanggalLahir);
     }
-
 }
+

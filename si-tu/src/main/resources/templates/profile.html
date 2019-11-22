@@ -1,10 +1,113 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+    <object th:include="fragments/fragment :: header" th:remove="tag"></object>
 </head>
+
 <body>
-<p th:text="${user.result.nama}"></p>
+
+<nav th:replace="fragments/fragment :: navbar"></nav>
+
+<!--**********************************
+    Main wrapper start
+***********************************-->
+<div id="main-wrapper">
+
+
+
+    <!--**********************************
+        Content body start
+    ***********************************-->
+    <div class="content-body">
+
+        <div class="row page-titles mx-0">
+            <div class="col p-md-0">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
+                    <li class="breadcrumb-item active"><a href="javascript:void(0)">Home</a></li>
+                </ol>
+            </div>
+        </div>
+        <!-- row -->
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-4 col-xl-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="media align-items-center mb-4">
+                                <img class="mr-3" src="images/avatar/11.png" width="80" height="80" alt="">
+                                <div class="media-body">
+                                    <h3 class="mb-0" th:text="${username}"></h3>
+                                    <p class="text-muted mb-0" th:text="${role.nama}"></p>
+                                </div>
+                            </div>
+
+                            <div class="row mb-5">
+                                <div class="col">
+                                    <div class="card card-profile text-center">
+                                        <span class="mb-1 text-primary"><i class="icon-people"></i></span>
+                                        <h3 class="mb-0">263</h3>
+                                        <p class="text-muted px-4">Following</p>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card card-profile text-center">
+                                        <span class="mb-1 text-warning"><i class="icon-user-follow"></i></span>
+                                        <h3 class="mb-0">263</h3>
+                                        <p class="text-muted">Followers</p>
+                                    </div>
+                                </div>
+                                <div class="col-12 text-center">
+                                    <button class="btn btn-danger px-5">Follow Now</button>
+                                </div>
+                            </div>
+
+                            <h4>About Me</h4>
+                            <p class="text-muted">Hi, I'm Pikamy, has been the industry standard dummy text ever since the 1500s.</p>
+                            <ul class="card-profile__info">
+                                <span th:if="${role.idRole} &lt; 5">
+                                <li class="mb-1"><strong class="text-dark mr-4">Alamat</strong> <span th:text="${user.alamat}"></span></li>
+                                <li><strong class="text-dark mr-4">Nomor Induk</strong> <span th:text="${user.ni}"></span></li>
+                                <li><strong class="text-dark mr-4">Tanggal Lahir</strong> <span th:text="${user.tanggalLahir}"></span></li>
+                                <li><strong class="text-dark mr-4">Tempat Lahir</strong> <span th:text="${user.tempatLahir}"></span></li>
+                                <li><strong class="text-dark mr-4">Nomor Telepon</strong> <span th:text="${user.telepon}"></span></li>
+                                </span>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- #/ container -->
+    </div>
+    <!--**********************************
+        Content body end
+    ***********************************-->
+
+
+    <!--**********************************
+        Footer start
+    ***********************************-->
+    <div class="footer">
+        <div class="copyright">
+            <p>Copyright &copy; Designed & Developed by <a href="https://themeforest.net/user/quixlab">Quixlab</a> 2018</p>
+        </div>
+    </div>
+    <!--**********************************
+        Footer end
+    ***********************************-->
+</div>
+<!--**********************************
+    Main wrapper end
+***********************************-->
+
+
 </body>
+<footer>
+    <nav th:replace="fragments/fragment :: foot"></nav>
+</footer>
+
 </html>
