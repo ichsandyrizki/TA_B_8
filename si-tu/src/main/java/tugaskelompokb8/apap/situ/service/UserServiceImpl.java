@@ -28,7 +28,6 @@ public class UserServiceImpl implements UserService{
 		String pass = encrypt(user.getPassword());
 		UserModel userModel = new UserModel();
 		userModel.setPassword(pass);
-
 		userModel.setUsername(user.getUsername());
 		RoleModel role = roleDb.findByIdRole(user.getIdRole());
 		userModel.setRole(role);
