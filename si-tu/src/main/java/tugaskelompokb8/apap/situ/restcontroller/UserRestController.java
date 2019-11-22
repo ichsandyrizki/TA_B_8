@@ -1,28 +1,34 @@
 package tugaskelompokb8.apap.situ.restcontroller;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import tugaskelompokb8.apap.situ.rest.BaseRest;
-import tugaskelompokb8.apap.situ.rest.UserSivitasList;
+import org.springframework.web.client.RestTemplate;
+
+import reactor.core.publisher.Mono;
+import tugaskelompokb8.apap.situ.rest.Setting;
+import tugaskelompokb8.apap.situ.rest.UserDetail;
+
 import tugaskelompokb8.apap.situ.service.UserRestService;
 
-import java.util.List;
-
 @RestController
-@RequestMapping(value="/api/user")
+@RequestMapping(value="/api/v1/situ")
 public class UserRestController {
-    @Autowired
-    private UserRestService userRestService;
-
-    @GetMapping("/list")
-    public BaseRest<List<UserSivitasList>> retrieveUser(){
-        BaseRest<List<UserSivitasList>> respon = new BaseRest<>();
-        respon.setStatus(200);
-        respon.setMessage("success");
-        respon.setResult(userRestService.retrieveUser());
-        return respon;
-    }
-
+	@Qualifier("userRestServiceImpl")
+	@Autowired
+	UserRestService userRestService;
+	
+	
+	//BUAT NYOBA DIPOSTMAN
+	@GetMapping(value="user/{idUser}")
+	private Object getUserApi(@PathVariable String idUser){
+		Object user = userRestService.getUser(idUser);
+		System.out.println();
+		return userRestService.getUser(idUser);
+	}
 }

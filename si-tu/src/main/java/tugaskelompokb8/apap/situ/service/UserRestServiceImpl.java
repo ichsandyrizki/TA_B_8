@@ -87,17 +87,4 @@ public class UserRestServiceImpl implements UserRestService {
                 .retrieve()
                 .bodyToMono(BaseRest.class);
     }
-
-    @Override
-    public List<UserSivitasList> retrieveUser() {
-        List<UserModel> listUser = userService.getListUser();
-        List<UserSivitasList> listUserSivitas = new ArrayList<>();
-        for(UserModel user : listUser){
-            UserSivitasList userListSivitas = new UserSivitasList();
-            userListSivitas.setUsername(user.getUsername());
-            userListSivitas.setRole(user.getRole().getNama());
-            listUserSivitas.add(userListSivitas);
-        }
-        return listUserSivitas;
-    }
 }

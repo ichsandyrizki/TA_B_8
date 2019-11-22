@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -53,6 +54,9 @@ public class UserController {
 		model.addAttribute("listRole", roleDb.findAll());
 		return "form-add-user";
 	}
+	
+	@Autowired
+	UserRestService userRestService;
 	
 	@RequestMapping(value = "/addUser", method = RequestMethod.POST)
 	private String addUserSubmit(@ModelAttribute @Valid UserSivitasModel userSivitas,
@@ -106,5 +110,13 @@ public class UserController {
 			model.addAttribute("messages","");
 			return "index";
 		}
+	}
+	
+	//WEBSERVICE GET USER PROFILE DARI SIVITAS
+	@RequestMapping("/{idUser}")
+	public String getUserProfile(@PathVariable String idUser,Model model) {
+		Object user = userRestService.getUser(idUser);
+		model.addAttribute("user", user);
+		return "profile";
 	}
 }

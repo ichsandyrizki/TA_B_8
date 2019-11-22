@@ -9,6 +9,4 @@ import java.util.List;
 
 public interface UserRestService {
     Mono<BaseRest> registerUser (UserSivitasModel userSivitasModel);
-
-    List<UserSivitasList> retrieveUser();
 }
