@@ -8,4 +8,6 @@ public interface LowonganService {
     List<LowonganModel> getLowonganList();
     void addLowongan (LowonganModel lowonganModel);
     LowonganModel changeLowongan(LowonganModel lowongan, Long idLowongan);
+    LowonganModel getLowonganByJudul(String judul);
+    void createLowonganPustakawan();
 }

@@ -12,6 +12,9 @@ import tugaskelompokb8.apap.situ.model.PasswordModel;
 import tugaskelompokb8.apap.situ.repository.PengajuanSuratDb;
 import tugaskelompokb8.apap.situ.repository.RoleDb;
 import tugaskelompokb8.apap.situ.repository.UserDb;
+import tugaskelompokb8.apap.situ.service.LowonganService;
+import tugaskelompokb8.apap.situ.service.LowonganServiceImpl;
+import tugaskelompokb8.apap.situ.service.PengajuanSuratService;
 import tugaskelompokb8.apap.situ.service.UserService;
 
 @Controller
@@ -20,6 +23,12 @@ public class PageController {
 
 	@Autowired
     UserService userService;
+
+    @Autowired
+    LowonganService lowonganService;
+
+    @Autowired
+    PengajuanSuratService pengajuanSuratService;
 	
     @RequestMapping("/")
     private String home(Model model){
@@ -29,8 +38,8 @@ public class PageController {
 //            model.addAttribute("isAdmin", false);
 //        }
         model.addAttribute("jmlUser", userService.getListUser().size());
-        model.addAttribute("jmlSurat", 0);
-        model.addAttribute("jmlLowongan",0);
+        model.addAttribute("jmlSurat", pengajuanSuratService.getPengajuanSuratList().size());
+        model.addAttribute("jmlLowongan",lowonganService.getLowonganList().size());
 
         return "index";
     }

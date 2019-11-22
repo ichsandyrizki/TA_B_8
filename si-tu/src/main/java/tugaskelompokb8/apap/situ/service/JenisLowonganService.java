@@ -19,4 +19,6 @@ public interface JenisLowonganService {
 
     //Method untuk menghapus data jenis
     void deleteJenisLowongan(JenisLowonganModel jenisModel);
+
+    JenisLowonganModel getJenisByNama(String nama);
 }
