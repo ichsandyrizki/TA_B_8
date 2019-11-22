@@ -92,12 +92,17 @@ public class PengajuanSuratController {
         }else {
             username = principal.toString();
         }
-
-        if (userDb.findByUsername(username).getRole().getIdRole() == 2 || userDb.findByUsername(username).getRole().getIdRole() == 1){
+        if (userDb.findByUsername(username).getRole().getIdRole() == 1){
             model.addAttribute("pengajuan_list", pengajuanSuratService.getPengajuanSuratList());
         }
-        if (userDb.findByUsername(username).getRole().getIdRole() == 3 || userDb.findByUsername(username).getRole().getIdRole() == 4){
-            model.addAttribute("pengajuan_list", pengajuanSuratService.getPengajuanByUser(userDb.findByUsername(username)));
+        if (userDb.findByUsername(username).getRole().getIdRole() == 2){
+            model.addAttribute("pengajuan_list", pengajuanSuratService.getPengajuanSuratList());
+        }
+        if (userDb.findByUsername(username).getRole().getIdRole() == 3){
+            model.addAttribute("pengajuan_list", pengajuanSuratService.findPengajuanByUser(userDb.findByUsername(username)));
+        }
+        if (userDb.findByUsername(username).getRole().getIdRole() == 4){
+            model.addAttribute("pengajuan_list", pengajuanSuratService.findPengajuanByUser(userDb.findByUsername(username)));
         }
 
 
