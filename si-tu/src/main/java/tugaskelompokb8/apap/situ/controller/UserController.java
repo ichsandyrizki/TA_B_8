@@ -122,29 +122,31 @@ public class UserController {
         @RequestMapping("/view")
         public String getUserProfile (Model model) throws ParseException {
             UserModel user = userService.getUserCurrentLoggedIn();
-            System.out.println(user.getRole().getIdRole() + "  " + user.getIdUser());
+            model.addAttribute("role" ,user.getRole());
+            model.addAttribute("username", user.getUsername());
+
             if (user.getRole().getIdRole() < 5) {
-                System.out.println("masuk ke if < 5");
+
                 UserSivitasModel userModel = new UserSivitasModel();
                 Mono<BaseResponse> respon = userRestService.getUserData(user.getIdUser(), user.getRole().getIdRole());
                 LinkedHashMap<String, String> data = (LinkedHashMap<String, String>) Objects.requireNonNull(respon.block()).getResult();
-                String tanggal = data.get("tanggalLahir");
+
+                userModel.setIdRole(user.getRole().getIdRole());
+                userModel.setUsername(user.getUsername());
                 userModel.setNama(data.get("nama"));
                 userModel.setAlamat(data.get("alamat"));
                 if (user.getRole().getIdRole() == 4) {
-                    userModel.setNi("nis");
+                    userModel.setNi(data.get("nis"));
                 } else if (user.getRole().getIdRole() == 2) {
-                    userModel.setNi("nip");
+                    userModel.setNi(data.get("nip"));
                 } else {
-                    userModel.setNi("nig");
+                    userModel.setNi(data.get("nig"));
                 }
+                String tanggal = data.get("tanggalLahir");
                 userModel.setTanggalLahir(new SimpleDateFormat("yyyy-MM-dd").parse(tanggal));
                 userModel.setTempatLahir(data.get("tempatLahir"));
                 userModel.setTelepon(data.get("telepon"));
                 model.addAttribute("user", userModel);
-            } else {
-                System.out.println("masuk ke if > 4");
-                model.addAttribute("user", user);
             }
             return "profile";
         }
