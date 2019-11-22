@@ -85,6 +85,7 @@ Main wrapper start
                                         <th>Keterangan</th>
                                         <th>Jumlah</th>
                                         <th>Jenis Lowongan</th>
+                                        <th></th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -97,6 +98,11 @@ Main wrapper start
                                         <td th:text="${lowongan.keterangan}"></td>
                                         <td th:text="${lowongan.jumlah}"></td>
                                         <td th:text="${lowongan.jenisLowongan.getNama()}"></td>
+                                        <td>
+                                        	<form th:action="@{/lowongan/update/} + ${lowongan.idLowongan}" th:method="GET">							
+												<button class="btn btn-dark text-white" value="submit">Ubah</button>
+											</form>
+                                        </td>
 <!--                                        <td>-->
 <!--                                            <div class="btn">-->
 <!--                                                <button class="btn btn-sm btn-danger">-->

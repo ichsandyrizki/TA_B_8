@@ -19,14 +19,9 @@ import tugaskelompokb8.apap.situ.service.UserRestService;
 @RestController
 @RequestMapping(value="/api/v1/situ")
 public class UserRestController {
+
 	@Qualifier("userRestServiceImpl")
 	@Autowired
 	UserRestService userRestService;
-	
-	
-	
-	@GetMapping(value="user/{idUser}")
-	private Object getUserApi(@PathVariable String idUser){
-		return userRestService.getUser(idUser);
-	}
+
 }

@@ -6,20 +6,38 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import tugaskelompokb8.apap.situ.model.RoleModel;
 import tugaskelompokb8.apap.situ.model.UserModel;
+import tugaskelompokb8.apap.situ.repository.RoleDb;
 import tugaskelompokb8.apap.situ.repository.UserDb;
+import tugaskelompokb8.apap.situ.rest.UserSivitasModel;
+
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService{
 
 	@Autowired
 	UserDb userDb;
+
+	@Autowired
+	RoleDb roleDb;
 	
 	@Override
-	public UserModel addUser(UserModel user) {
+	public UserModel addUser(UserSivitasModel user) {
 		String pass = encrypt(user.getPassword());
-		user.setPassword(pass);
-		return userDb.save(user);
+		UserModel userModel = new UserModel();
+		userModel.setPassword(pass);
+
+		userModel.setUsername(user.getUsername());
+		RoleModel role = roleDb.findByIdRole(user.getIdRole());
+		userModel.setRole(role);
+		return userDb.save(userModel);
+	}
+
+	@Override
+	public List<UserModel> getListUser(){
+		return userDb.findAll();
 	}
 
 	@Override
@@ -49,6 +67,11 @@ public class UserServiceImpl implements UserService{
 		}
 
 		return userDb.findByUsername(username);
+	}
+
+	@Override
+	public void deleteUser(UserModel userModel) {
+		userDb.delete(userModel);
 	}
 
 }
