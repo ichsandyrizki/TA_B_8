@@ -1,5 +1,7 @@
 package tugaskelompokb8.apap.situ.controller;
 
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import tugaskelompokb8.apap.situ.model.JenisSuratModel;
 import tugaskelompokb8.apap.situ.model.PengajuanSuratModel;
+import tugaskelompokb8.apap.situ.model.UserModel;
+import tugaskelompokb8.apap.situ.repository.UserDb;
 import tugaskelompokb8.apap.situ.service.JenisSuratService;
 import tugaskelompokb8.apap.situ.service.PengajuanSuratService;
 import tugaskelompokb8.apap.situ.service.UserService;
@@ -32,6 +36,9 @@ public class PengajuanSuratController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    UserDb userDb;
 
     @RequestMapping(value = "/pengajuanSurat/add", method = RequestMethod.GET)
     public String addPengajuanSuratFormPage(Model model) {
@@ -78,10 +85,25 @@ public class PengajuanSuratController {
     @RequestMapping("/pengajuanSurat/statuses")
     public String pengajuanViewAll(Model model){
 
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username;
+        if (principal instanceof UserDetails) {
+            username = ((UserDetails)principal).getUsername();
+        }else {
+            username = principal.toString();
+        }
 
-        List<PengajuanSuratModel> pengajuanSuratModelList = pengajuanSuratService.getPengajuanSuratList();
+        if (userDb.findByUsername(username).getRole().getIdRole() == 2 || userDb.findByUsername(username).getRole().getIdRole() == 1){
+            model.addAttribute("pengajuan_list", pengajuanSuratService.getPengajuanSuratList());
+        }
+        if (userDb.findByUsername(username).getRole().getIdRole() == 3 || userDb.findByUsername(username).getRole().getIdRole() == 4){
+            model.addAttribute("pengajuan_list", pengajuanSuratService.getPengajuanByUser(userDb.findByUsername(username)));
+        }
 
-        model.addAttribute("pengajuan_list",pengajuanSuratModelList);
+
+//        List<PengajuanSuratModel> pengajuanSuratModelList = pengajuanSuratService.getPengajuanSuratList();
+
+//        model.addAttribute("pengajuan_list",pengajuanSuratModelList);
 
         return "pengajuan-view-all";
     }
@@ -94,6 +116,32 @@ public class PengajuanSuratController {
             @PathVariable(value="idPengajuanSurat") Long idPengajuanSurat
     ){
         PengajuanSuratModel pengajuanSuratModel = pengajuanSuratService.getPengajuanById(idPengajuanSurat).get();
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username;
+        if (principal instanceof UserDetails) {
+            username = ((UserDetails)principal).getUsername();
+        }else {
+            username = principal.toString();
+        }
+
+        if (userDb.findByUsername(username).getRole().getIdRole() == 1){
+            if (pengajuanSuratModel.getStatus() == 0){
+                model.addAttribute("pengajuanSurat", pengajuanSuratModel);
+                return "pengajuan-update-mk2";
+            }else{
+                return "404";
+            }
+        }
+        if (userDb.findByUsername(username).getRole().getIdRole() == 2){
+            if (pengajuanSuratModel.getStatus() == 2){
+                model.addAttribute("pengajuanSurat", pengajuanSuratModel);
+                return "pengajuan-update-mk2";
+            }else{
+                return "404";
+            }
+
+        }
+
 //        if (request.isUserInRole("Kepala Sekolah")){
 //            if (pengajuanSuratModel.getStatus()==0){
 //                model.addAttribute("pengajuanSurat", pengajuanSuratModel);
@@ -111,7 +159,6 @@ public class PengajuanSuratController {
 //            }
 //        }
         model.addAttribute("pengajuanSurat", pengajuanSuratModel);
-
         return "pengajuan-update-mk2";
     }
 

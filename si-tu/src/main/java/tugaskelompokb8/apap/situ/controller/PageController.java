@@ -23,11 +23,11 @@ public class PageController {
 	
     @RequestMapping("/")
     private String home(Model model){
-        if(userService.getUserCurrentLoggedIn().getRole().getNama().equals("Admin TU")){
-            model.addAttribute("isAdmin", true);
-        }else{
-            model.addAttribute("isAdmin", false);
-        }
+//        if(userService.getUserCurrentLoggedIn().getRole().getNama().equals("Admin TU")){
+//            model.addAttribute("isAdmin", true);
+//        }else{
+//            model.addAttribute("isAdmin", false);
+//        }
         model.addAttribute("jmlUser", userService.getListUser().size());
         model.addAttribute("jmlSurat", 0);
         model.addAttribute("jmlLowongan",0);

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tugaskelompokb8.apap.situ.model.JenisSuratModel;
 import tugaskelompokb8.apap.situ.model.PengajuanSuratModel;
+import tugaskelompokb8.apap.situ.model.UserModel;
 import tugaskelompokb8.apap.situ.repository.PengajuanSuratDb;
 
 import java.text.DateFormat;
@@ -98,6 +99,11 @@ public class PengajuanSuratServiceImpl implements PengajuanSuratService {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public List<PengajuanSuratModel> getPengajuanByUser(UserModel user){
+        return (List<PengajuanSuratModel>) pengajuanSuratDb.findByUser(user);
     }
 
 }
