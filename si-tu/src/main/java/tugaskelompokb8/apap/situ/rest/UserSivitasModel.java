@@ -74,7 +74,6 @@ public class UserSivitasModel implements Serializable{
     @Column(name="role", nullable = false)
     private long idRole;
 
-
     public String getNi() {
         return ni;
     }
@@ -159,5 +158,5 @@ public class UserSivitasModel implements Serializable{
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         return dateFormat.format(tanggalLahir);
     }
-
 }
+
