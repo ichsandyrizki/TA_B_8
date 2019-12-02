@@ -1,40 +1,61 @@
-//package tugaskelompokb8.apap.situ.controller;
-//
-////import apap.tutorial.gopud.model.MenuModel;
-////import apap.tutorial.gopud.model.RestoranModel;
-////import apap.tutorial.gopud.rest.RestoranDetail;
-////import apap.tutorial.gopud.service.RestoranRestService;
-////import apap.tutorial.gopud.service.RestoranService;
-//
-//import tugaskelompokb8.apap.situ.model.*;
-//import tugaskelompokb8.apap.situ.repository.*;
-//import tugaskelompokb8.apap.situ.rest.*;
-//import tugaskelompokb8.apap.situ.service.*;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.beans.factory.annotation.Qualifier;
-//import org.springframework.http.HttpStatus;
-//import org.springframework.http.ResponseEntity;
-//import org.springframework.ui.Model;
-//import org.springframework.web.bind.annotation.*;
-//import org.springframework.web.server.ResponseStatusException;
-//import reactor.core.publisher.Mono;
-//
-//import java.util.List;
-//import java.util.NoSuchElementException;
-//import javax.validation.Valid;
-//
-//@RestController
-//@RequestMapping("/sikop")
-//public class KoperasiRestController {
-//
-//    @Autowired
-//    private PengajuanPinjamanService pengajuanPinjamanService;
-//
-//    @PostMapping(value = "/addPengajuan")
-//    private Mono<String> postStatus(){
-//        return pengajuanPinjamanService.postPinjamanKoperasi();
-//    }
-//
-//
-//
-//}
+package tugaskelompokb8.apap.situ.controller;
+
+import java.sql.Date;
+import java.util.Objects;
+
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import tugaskelompokb8.apap.situ.model.UserModel;
+import tugaskelompokb8.apap.situ.rest.BaseRest;
+import tugaskelompokb8.apap.situ.rest.PinjamanDetail;
+import tugaskelompokb8.apap.situ.service.PinjamanRestService;
+import tugaskelompokb8.apap.situ.service.UserService;
+import reactor.core.publisher.Mono;
+
+@Controller
+public class KoperasiRestController{
+
+    @Autowired
+    PinjamanRestService pinjamanRestService;
+
+    @Autowired
+    UserService userService;
+
+    @GetMapping("/pinjaman/tambah")
+    private String addPeminjamanForm( Model model) {
+        PinjamanDetail pinjamanDetail = new PinjamanDetail();
+        model.addAttribute("title", "Tambah Peminjaman");
+        model.addAttribute("pinjamanDetail", pinjamanDetail);
+
+        return "pinjaman";
+    }
+
+    @PostMapping(value = "/pinjaman/tambah")
+    private String pinjamanSubmit(@ModelAttribute @Valid PinjamanDetail form,
+                                    Model model){
+        Mono<BaseRest> api;
+        PinjamanDetail pinjaman = new PinjamanDetail();
+        pinjaman.setJumlahPinjaman(form.getJumlahPinjaman());
+        pinjaman.setTanggalPengajuan(form.getTanggalPengajuan());
+
+        String username = userService.getUserCurrentLoggedIn().getUsername();
+        String uuid = userService.getUserCurrentLoggedIn().getIdUser();
+
+        api = pinjamanRestService.registerPinjaman(pinjaman, uuid);
+
+        if (api.block().getStatus() == 200){
+            return "pinjaman";
+        }
+        else {
+            return "500";
+        }
+    }
+}

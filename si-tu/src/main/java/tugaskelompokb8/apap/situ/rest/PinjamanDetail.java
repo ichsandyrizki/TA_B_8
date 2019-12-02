@@ -8,21 +8,21 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class PinjamanDetail {
 
     @JsonProperty("tanggalPengajuan")
-    private Date tanggalPinjaman;
+    private Date tanggalPengajuan;
 
-    @JsonProperty("jumlahPeminjaman")
+    @JsonProperty("jumlahPinjaman")
     private Integer jumlahPinjaman;
 
-    public Date getTanggalPinjaman() {
-        return tanggalPinjaman;
+    public Date getTanggalPengajuan() {
+        return this.tanggalPengajuan;
     }
 
-    public void setTanggalPinjaman(Date tanggalPinjaman) {
-        this.tanggalPinjaman = tanggalPinjaman;
+    public void setTanggalPengajuan(Date tanggalPengajuan) {
+        this.tanggalPengajuan = tanggalPengajuan;
     }
 
     public Integer getJumlahPinjaman() {
-        return jumlahPinjaman;
+        return this.jumlahPinjaman;
     }
 
     public void setJumlahPinjaman(Integer jumlahPinjaman) {

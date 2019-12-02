@@ -5,6 +5,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 import tugaskelompokb8.apap.situ.rest.*;
@@ -28,16 +29,17 @@ public class PinjamanRestServiceImpl implements PinjamanRestService{
     static RestTemplate restTemplate = new RestTemplate();
 
     @Override
-    public Mono<BaseRest> registerPinjaman (PinjamanModel pinjaman){
+    public Mono<BaseRest> registerPinjaman (PinjamanDetail pinjaman, String uuidUser){
         Map<String, String> data = new HashMap<String, String>();
         data.put("tanggalPengajuan", String.valueOf(pinjaman.getTanggalPengajuan()));
-        data.put("jumlahPeminjaman", String.valueOf(pinjaman.getJumlahPeminjaman()));
+        data.put("jumlahPeminjaman", String.valueOf(pinjaman.getJumlahPinjaman()));
         String uri = "";
 
 
         return this.webClient
                 .post()
                 .uri(uri)
+//                .uri("/api/addPinjaman?id=" + uuidUser)
                 .syncBody(data)
                 .retrieve()
                 .bodyToMono(BaseRest.class);
