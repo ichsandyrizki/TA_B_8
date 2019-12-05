@@ -59,8 +59,8 @@ public class PengajuanSuratController {
         surat.setUser(userService.getUserCurrentLoggedIn());
         surat.setTanggalPengajuan(Date.valueOf(LocalDate.now()));
         List<JenisSuratModel> listJenisSurat = jenisSuratService.getJenisSuratList();
-        List<PengajuanSuratModel> pengajuanSuratModelList = pengajuanSuratService.getPengajuanSuratList();
         pengajuanSuratService.addPengajuanSurat(surat);
+        List<PengajuanSuratModel> pengajuanSuratModelList = pengajuanSuratService.getPengajuanSuratList();
         model.addAttribute("surat", surat);
         model.addAttribute("listJenisSurat", listJenisSurat);
         model.addAttribute("pengajuan_list", pengajuanSuratModelList);
