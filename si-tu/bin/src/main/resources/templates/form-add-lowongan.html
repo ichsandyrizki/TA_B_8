@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <object th:include="fragments/fragment :: header" th:remove="tag"></object>
+    <!--    <object th:include="fragments/fragment :: css" th:remove="tag"></object>-->
+    <!--    <object th:include="fragments/fragment :: js" th:remove="tag"></object>-->
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<!--**********************************
+Main wrapper start
+***********************************-->
+<div id="main-wrapper">
+    <!--**********************************
+        Content body start
+    ***********************************-->
+    <div th:replace="fragments/fragment :: sidebar"></div>
+    <div class="content-body">
+
+        <div class="row page-titles mx-0">
+            <div class="col p-md-0">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">Jenis Lowongan</a></li>
+                    <li class="breadcrumb-item active"><a th:href="@{/}" >Home</a></li>
+                </ol>
+            </div>
+        </div>
+        <!-- row -->
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Buat Lowongan</h4>
+                            <div class="basic-form">
+                                <form th:action="@{/lowongan/add}" th:object="${lowongan}" method="POST">
+                                    <div class="form-group">
+                                        <input type="text" name="judul" class="form-control input-rounded" placeholder="Judul">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="date" name="tanggalDibuka" class="form-control input-rounded" placeholder="Tanggal Dibuka">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="date" name="tanggalDitutup" class="form-control input-rounded" placeholder="Tanggal Ditutup">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" name="keterangan" class="form-control input-rounded" placeholder="Keterangan">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="number" name="jumlah" class="form-control input-rounded" placeholder="Jumlah">
+                                    </div>
+                                    <div class="form-group">
+                                        <select id = "jenis_lowongan" th:field="*{jenisLowongan}" class="form-control input-rounded" name="jenis_lowongan">
+                                            <option th:each="jenis : ${listJenisLowongan}"
+                                                    th:value ="${jenis.idJenisLowongan}"
+                                                    th:text="${jenis.nama}"></option>
+                                        </select>
+                                    </div>
+                                    <button type="submit" class="btn btn-dark">Submit</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+<!--                            <div th:if="${nothide}" class="alert alert-danger" role="alert">-->
+<!--                                <b th:text="${success}"></b>-->
+<!--                            </div>-->
+                            <div class="table-responsive">
+                                <table class="table table-xs mb-0">
+                                    <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Judul</th>
+                                        <th>Tanggal Dibuka</th>
+                                        <th>Tanggal Ditutup</th>
+                                        <th>Keterangan</th>
+                                        <th>Jumlah</th>
+                                        <th>Jenis Lowongan</th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="lowongan,iterationStatus: *{listLowongan}"
+                                        th:style="${iterationStatus.even}?'color:gray'">
+                                        <td th:text="${iterationStatus.count}"></td>
+                                        <td th:text="${lowongan.judul}"></td>
+                                        <td th:text="${lowongan.tanggalDibuka}"></td>
+                                        <td th:text="${lowongan.tanggalDitutup}"></td>
+                                        <td th:text="${lowongan.keterangan}"></td>
+                                        <td th:text="${lowongan.jumlah}"></td>
+                                        <td th:text="${lowongan.jenisLowongan.getNama()}"></td>
+                                        <td>
+                                        	<form th:action="@{/lowongan/update/} + ${lowongan.idLowongan}" th:method="GET">							
+												<button class="btn btn-dark text-white" value="submit">Ubah</button>
+											</form>
+                                        </td>
+<!--                                        <td>-->
+<!--                                            <div class="btn">-->
+<!--                                                <button class="btn btn-sm btn-danger">-->
+<!--                                                    <a th:href="@{/jenis-lowongan/delete/}+${jenis.idJenisLowongan}" style="color:white" method="POST">Hapus</a>-->
+<!--                                                </button>-->
+<!--                                            </div>-->
+<!--                                        </td>-->
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- #/ container -->
+    </div>
+    <!--**********************************
+        Content body end
+    ***********************************-->
+
+
+    <!--**********************************
+        Footer start
+    ***********************************-->
+    <div class="footer">
+        <div class="copyright">
+            <p>Copyright &copy; Designed & Developed by <a href="https://github.com/ichsandyrizki/TA_B_8">APAP Kelompok B8 SITU</a> 2019</p>
+        </div>
+    </div>
+    <!--**********************************
+        Footer end
+    ***********************************-->
+</div>
+<!--**********************************
+    Main wrapper end
+***********************************-->
+</body>
+<footer>
+    <nav th:replace="fragments/fragment :: foot"></nav>
+</footer>
+
+</html>

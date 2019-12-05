@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <object th:include="fragments/fragment :: header" th:remove="tag"></object>
+    <!--    <object th:include="fragments/fragment :: css" th:remove="tag"></object>-->
+    <!--    <object th:include="fragments/fragment :: js" th:remove="tag"></object>-->
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<!--**********************************
+Main wrapper start
+***********************************-->
+<div id="main-wrapper">
+    <!--**********************************
+        Content body start
+    ***********************************-->
+    <div th:replace="fragments/fragment :: sidebar"></div>
+    <div class="content-body">
+
+        <div class="row page-titles mx-0">
+            <div class="col p-md-0">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">Pengajuan Surat</a></li>
+                    <li class="breadcrumb-item active"><a th:href="@{/}" >Home</a></li>
+                </ol>
+            </div>
+        </div>
+        <!-- row -->
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Pengajuan Surat</h4>
+                            <div class="basic-form">
+                                <form th:action="@{/pengajuanSurat/add}" th:object="${surat}" method="POST">
+                                    <input type="hidden" name="idPengajuanSurat" />
+                                    Jenis Surat
+                                    <select id = "jenisSurat" th:field="*{jenisSurat}" class="form-control" name="jenisSurat">
+                                        <option th:each="jenis : ${listJenisSurat}"
+                                                th:value ="${jenis.idJenisSurat}"
+                                                th:text="${jenis.nama}"></option>
+                                    </select>
+                                    <br>
+                                    Keterangan
+                                    <input type="text" id="keterangan" name="keterangan" class="form-control"/>
+                                    <br>
+
+                                    <button type="submit" class="btn btn-dark" name="submit"> Submit </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <!--<div th:if="${nothide}" class="alert alert-danger" role="alert">-->
+                            <!--<b th:text="${success}"></b>-->
+                            <!--</div>-->
+                            <div class="table-responsive">
+                                <table class="table table-xs mb-0">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">No</th>
+                                        <th scope="col">Nomor Surat</th>
+                                        <th scope="col">Keterangan</th>
+                                        <th scope="col">status</th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody th:each="pengajuanSurat, iterationStatus : ${pengajuan_list}">
+                                    <tr>
+                                        <th scope="row" th:text="${iterationStatus.count}"></th>
+                                        <td th:text="${pengajuanSurat.nomorSurat}"></td>
+                                        <td th:text="${pengajuanSurat.keterangan}"></td>
+                                        <td th:switch="${pengajuanSurat.status}">
+                                            <p th:case="0">Menunggu Persetujuan</p>
+                                            <p th:case="1">Ditolak</p>
+                                            <p th:case="2">Disetujui</p>
+                                            <p th:case="3">Diproses</p>
+                                            <p th:case="4">Selesai</p>
+                                        </td>
+                                        <td>
+                                            <div class="btn">
+                                                <button class="btn btn-sm btn-danger">
+                                                    <a th:href="@{/pengajuanSurat/delete/}+${pengajuanSurat.idPengajuanSurat}" style="color:white" method="POST">Hapus</a>
+                                                </button>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="btn">
+                                                <button class="btn btn-primary">
+                                                    <a th:href="@{/pengajuanSurat/update/}+${pengajuanSurat.idPengajuanSurat}" style="color:white" method="POST">Update</a>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- #/ container -->
+    </div>
+    <!--**********************************
+        Content body end
+    ***********************************-->
+
+
+    <!--**********************************
+        Footer start
+    ***********************************-->
+    <div class="footer">
+        <div class="copyright">
+            <p>Copyright &copy; Designed & Developed by <a href="https://github.com/ichsandyrizki/TA_B_8">APAP Kelompok B8 SITU</a> 2019</p>
+        </div>
+    </div>
+    <!--**********************************
+        Footer end
+    ***********************************-->
+</div>
+<!--**********************************
+    Main wrapper end
+***********************************-->
+</body>
+<footer>
+    <nav th:replace="fragments/fragment :: foot"></nav>
+</footer>
+
+</html>
