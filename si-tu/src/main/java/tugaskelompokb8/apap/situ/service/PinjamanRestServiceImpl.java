@@ -21,25 +21,21 @@ public class PinjamanRestServiceImpl implements PinjamanRestService{
 
     public PinjamanRestServiceImpl(WebClient.Builder webClientBuild) {
         this.webClient = webClientBuild
-                .baseUrl(Setting.pengajuanURL)
-                .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                .baseUrl(Setting.koperasiURL)
+//                .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .build();
     }
-
-    static RestTemplate restTemplate = new RestTemplate();
 
     @Override
     public Mono<BaseRest> registerPinjaman (PinjamanDetail pinjaman, String uuidUser){
         Map<String, String> data = new HashMap<String, String>();
         data.put("tanggalPengajuan", String.valueOf(pinjaman.getTanggalPengajuan()));
         data.put("jumlahPeminjaman", String.valueOf(pinjaman.getJumlahPinjaman()));
-        String uri = "";
-
 
         return this.webClient
                 .post()
-                .uri(uri)
-//                .uri("/api/addPinjaman?id=" + uuidUser)
+//                .uri(uri)
+                .uri("/api/addPinjaman?id=" + uuidUser)
                 .syncBody(data)
                 .retrieve()
                 .bodyToMono(BaseRest.class);

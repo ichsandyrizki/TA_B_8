@@ -34,6 +34,10 @@ Main wrapper start
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
+                            <div th:if="${message}" id="alert" class="alert alert-dismissible fade show d-flex justify-content-center" th:classappend="${type}">
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                <span th:text="${message}" th:remove="tag"></span>
+                            </div>
                             <h4 class="card-title">Pinjaman</h4>
                             <div class="basic-form">
                                 <form th:action="@{/pinjaman/tambah}" th:object="${pinjamanDetail}" method="POST">

@@ -52,6 +52,8 @@ public class KoperasiRestController{
         api = pinjamanRestService.registerPinjaman(pinjaman, uuid);
 
         if (api.block().getStatus() == 200){
+            model.addAttribute("message", "Peminjaman berhasil dibuat!");
+            model.addAttribute("type", "alert-success");
             return "pinjaman";
         }
         else {
