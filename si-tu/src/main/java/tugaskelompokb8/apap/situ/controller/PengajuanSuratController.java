@@ -105,11 +105,6 @@ public class PengajuanSuratController {
             model.addAttribute("pengajuan_list", pengajuanSuratService.findPengajuanByUser(userDb.findByUsername(username)));
         }
 
-
-//        List<PengajuanSuratModel> pengajuanSuratModelList = pengajuanSuratService.getPengajuanSuratList();
-
-//        model.addAttribute("pengajuan_list",pengajuanSuratModelList);
-
         return "pengajuan-view-all";
     }
 
@@ -146,23 +141,6 @@ public class PengajuanSuratController {
             }
 
         }
-
-//        if (request.isUserInRole("Kepala Sekolah")){
-//            if (pengajuanSuratModel.getStatus()==0){
-//                model.addAttribute("pengajuanSurat", pengajuanSuratModel);
-//                return "pengajuan-update-mk2";
-//            }else {
-//                return "404";
-//            }
-//        }
-//        else {
-//            if (pengajuanSuratModel.getStatus()== 2){
-//                model.addAttribute("pengajuanSurat", pengajuanSuratModel);
-//                return "pengajuan-update-mk2";
-//            }else {
-//                return "404";
-//            }
-//        }
         model.addAttribute("pengajuanSurat", pengajuanSuratModel);
         return "pengajuan-update-mk2";
     }
@@ -174,8 +152,9 @@ public class PengajuanSuratController {
             @PathVariable(value="idPengajuanSurat") Long idPengajuanSurat
     ){
         PengajuanSuratModel updatedModel = pengajuanSuratService.updatePengajuan(pengajuanSuratModel);
-
-        return "redirect:/pengajuanSurat/statuses";
+        String message = "pengajuan berhasil diubah";
+        model.addAttribute("message", message);
+        return "success-page";
     }
 
 }

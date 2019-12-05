@@ -30,9 +30,8 @@ public class KoperasiRestController{
     UserService userService;
 
     @GetMapping("/pinjaman/tambah")
-    private String addPeminjamanForm( Model model) {
+    private String addPeminjamanForm(Model model) {
         PinjamanDetail pinjamanDetail = new PinjamanDetail();
-        model.addAttribute("title", "Tambah Peminjaman");
         model.addAttribute("pinjamanDetail", pinjamanDetail);
 
         return "pinjaman";
@@ -45,8 +44,6 @@ public class KoperasiRestController{
         PinjamanDetail pinjaman = new PinjamanDetail();
         pinjaman.setJumlahPinjaman(form.getJumlahPinjaman());
         pinjaman.setTanggalPengajuan(form.getTanggalPengajuan());
-
-        String username = userService.getUserCurrentLoggedIn().getUsername();
         String uuid = userService.getUserCurrentLoggedIn().getIdUser();
 
         api = pinjamanRestService.registerPinjaman(pinjaman, uuid);
