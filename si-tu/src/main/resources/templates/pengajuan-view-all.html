@@ -56,7 +56,7 @@ Main wrapper start
                                         <p th:case="4">Selesai</p>
                                     </td>
                                     <td>
-                                        <div th:if="${pengajuanSurat.status ==2}" class="btn">
+                                        <div th:if="${pengajuanSurat.status ==0}" class="btn">
                                             <button class="btn btn-sm btn-danger">
                                                 <a th:href="@{/pengajuanSurat/delete/}+${pengajuanSurat.idPengajuanSurat}" style="color:white" method="POST">Hapus</a>
                                             </button>
@@ -155,6 +155,13 @@ Main wrapper start
                                         <p th:case="3">Diproses</p>
                                         <p th:case="4">Selesai</p>
                                     </td>
+                                    <td>
+                                        <div th:if="${pengajuanSurat.status ==0}" class="btn">
+                                            <button class="btn btn-sm btn-danger">
+                                                <a th:href="@{/pengajuanSurat/delete/}+${pengajuanSurat.idPengajuanSurat}" style="color:white" method="POST">Hapus</a>
+                                            </button>
+                                        </div>
+                                    </td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -190,6 +197,13 @@ Main wrapper start
                                             <p th:case="2">Disetujui</p>
                                             <p th:case="3">Diproses</p>
                                             <p th:case="4">Selesai</p>
+                                        </td>
+                                        <td>
+                                            <div th:if="${pengajuanSurat.status ==0}" class="btn">
+                                                <button class="btn btn-sm btn-danger">
+                                                    <a th:href="@{/pengajuanSurat/delete/}+${pengajuanSurat.idPengajuanSurat}" style="color:white" method="POST">Hapus</a>
+                                                </button>
+                                            </div>
                                         </td>
                                     </tr>
                                     </tbody>
