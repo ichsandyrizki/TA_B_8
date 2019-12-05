@@ -47,7 +47,7 @@ public class PengajuanSuratRestController {
 	@GetMapping(value="pengajuanSurat/{idPengajuan}")
 	public BaseResponse<PengajuanSuratDetail> retrievePengajuanSurat(@PathVariable (value="idPengajuan") Long idPengajuan) {
 		try {
-			BaseResponse<PengajuanSuratDetail> response = new BaseResponse<>();
+			BaseResponse<PengajuanSuratDetail> response = new BaseResponse<PengajuanSuratDetail>();
 			response.setMessage("success");
 			response.setStatus(200);
 			response.setResult(pengajuanSuratRestService.getPengajuanSuratById(idPengajuan));

@@ -23,7 +23,7 @@ public class JenisSuratRestController {
 	@GetMapping(value="jenisSurat/all")
 	public BaseResponse<List<JenisSuratModel>> retrieveAllJenisSurat(){
 		try {
-			BaseResponse<List<JenisSuratModel>> response = new BaseResponse<>();
+			BaseResponse<List<JenisSuratModel>> response = new BaseResponse<List<JenisSuratModel>>();
 			response.setMessage("success");
 			response.setStatus(200);
 			response.setResult(jenisSuratDb.findAll());
