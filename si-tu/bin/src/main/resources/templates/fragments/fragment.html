@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title> Home </title>
+    <div th:fragment="header">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title>SI Tata Usaha</title>
+        <!-- Favicon icon -->
+        <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
+        <!-- Pignose Calender -->
+        <link href="./plugins/pg-calendar/css/pignose.calendar.min.css" rel="stylesheet">
+        <!-- Chartist -->
+        <link rel="stylesheet" href="./plugins/chartist/css/chartist.min.css">
+        <link rel="stylesheet" href="./plugins/chartist-plugin-tooltips/css/chartist-plugin-tooltip.css">
+        <!-- Custom Stylesheet -->
+        <link href="/css/style.css" rel="stylesheet">
+    </div>
+    <div th:fragment="css">
+        <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    </div>
+    <div th:fragment="js">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abt TE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4s F86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script th:src="@{/js/bootstrap.min.js}"></script>
+    </div>
+
+</head>
+
+<body>
+<div th:fragment="navbar">
+    <!--*******************
+          Preloader start
+      ********************-->
+    <div id="preloader">
+        <div class="loader">
+            <svg class="circular" viewBox="25 25 50 50">
+                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10" />
+            </svg>
+        </div>
+    </div>
+    <!--*******************
+        Preloader end
+    ********************-->
+</div>
+<div th:fragment="sidebar">
+    <!--**********************************
+            Nav header start
+        ***********************************-->
+    <div class="nav-header">
+        <div class="brand-logo">
+            <a href="/" style="color:white">
+                <b>SI</b>
+                <span class="brand-title">
+                        <b>Tata Usaha</b>
+                    </span>
+            </a>
+        </div>
+    </div>
+    <!--**********************************
+        Nav header end
+    ***********************************-->
+
+    <!--**********************************
+        Header start
+    ***********************************-->
+    <div class="header">
+        <div class="header-content clearfix">
+
+            <div class="nav-control">
+                <div class="hamburger">
+                    <span class="toggle-icon"><i class="icon-menu"></i></span>
+                </div>
+            </div>
+            <div class="header-left">
+                <div class="input-group icons">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text bg-transparent border-0 pr-2 pr-sm-3" id="basic-addon1"><i class="mdi mdi-magnify"></i></span>
+                    </div>
+                    <input type="search" class="form-control" placeholder="Search Dashboard" aria-label="Search Dashboard">
+                    <div class="drop-down animated flipInX d-md-none">
+                        <form action="#">
+                            <input type="text" class="form-control" placeholder="Search">
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="header-right">
+                <ul class="clearfix">
+                    <li class="icons dropdown">
+                        <div class="user-img c-pointer position-relative"   data-toggle="dropdown">
+                            <span class="activity active"></span>
+                            <img src="images/user/1.png" height="40" width="40" alt="">
+                        </div>
+                        <div class="drop-down dropdown-profile animated fadeIn dropdown-menu">
+                            <div class="dropdown-content-body">
+                                <ul>
+                                    <li>
+                                        <a th:href="@{/user/view}"><i class="icon-user"></i> <span>Profile</span></a>
+                                    </li>
+                                    <li th:if="${isAdmin}">
+                                        <a th:href="@{/user/addUser}"><i class="icon-user"></i> <span>Add New User</span></a>
+                                    </li>
+                                    <hr class="my-2">
+                                    <li><a th:href="@{/logout}"><i class="icon-key"></i> <span>Logout</span></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--**********************************
+        Header end ti-comment-alt
+    ***********************************-->
+
+    <!--**********************************
+        Sidebar start
+    ***********************************-->
+    <div class="nk-sidebar">
+        <div class="nk-nav-scroll">
+            <ul class="metismenu" id="menu">
+                <li>
+                    <a th:href="@{/}" aria-expanded="false">
+                        <i class="icon-speedometer menu-icon"></i><span class="nav-text">Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <i class="icon-envelope menu-icon"></i> <span class="nav-text">Surat</span>
+                    </a>
+                    <ul aria-expanded="false">
+                        <li><a th:href="@{/pengajuanSurat/statuses}">Daftar Pengajuan Surat</a></li>
+                        <li><a th:href="@{/pengajuanSurat/add}">Pengajuan Surat</a></li>
+                        <li><a th:href="@{/jenisSurat/add}">Jenis Surat</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <i class="icon-notebook menu-icon"></i> <span class="nav-text">Lowongan</span>
+                    </a>
+                    <ul aria-expanded="false">
+                        <li><a th:href="@{/lowongan/add}">Tambah Lowongan</a></li>
+                        <li><a th:href="@{/jenis-lowongan/add}">Jenis Lowongan</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <i class="icon-notebook menu-icon"></i> <span class="nav-text">Peminjaman</span>
+                    </a>
+                    <ul aria-expanded="false">
+                        <li><a th:href="@{/pinjaman/tambah}">Tambah Pinjaman</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!--**********************************
+        Sidebar end
+    ***********************************-->
+</div>
+<footer th:fragment="foot">
+    <!--**********************************
+       Scripts
+   ***********************************-->
+    <script src="/plugins/common/common.min.js"></script>
+    <script src="/js/custom.min.js"></script>
+    <script src="/js/settings.js"></script>
+    <script src="/js/gleek.js"></script>
+    <script src="/js/styleSwitcher.js"></script>
+
+    <!-- Chartjs -->
+    <script src="./plugins/chart.js/Chart.bundle.min.js"></script>
+    <!-- Circle progress -->
+    <script src="./plugins/circle-progress/circle-progress.min.js"></script>
+    <!-- Datamap -->
+    <script src="./plugins/d3v3/index.js"></script>
+    <script src="./plugins/topojson/topojson.min.js"></script>
+    <script src="./plugins/datamaps/datamaps.world.min.js"></script>
+    <!-- Morrisjs -->
+    <script src="./plugins/raphael/raphael.min.js"></script>
+    <script src="./plugins/morris/morris.min.js"></script>
+    <!-- Pignose Calender -->
+    <script src="./plugins/moment/moment.min.js"></script>
+    <script src="./plugins/pg-calendar/js/pignose.calendar.min.js"></script>
+    <!-- ChartistJS -->
+    <script src="./plugins/chartist/js/chartist.min.js"></script>
+    <script src="./plugins/chartist-plugin-tooltips/js/chartist-plugin-tooltip.min.js"></script>
+
+
+
+    <script src="./js/dashboard/dashboard-1.js"></script>
+</footer>
+
+</body>
+</html>

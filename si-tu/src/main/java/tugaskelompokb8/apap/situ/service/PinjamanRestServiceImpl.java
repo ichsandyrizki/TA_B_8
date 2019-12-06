@@ -35,7 +35,7 @@ public class PinjamanRestServiceImpl implements PinjamanRestService{
         return this.webClient
                 .post()
 //                .uri(uri)
-                .uri("/api/addPinjaman?id=" + uuidUser)
+                .uri("/api/pinjaman/add?uuid=" + uuidUser)
                 .syncBody(data)
                 .retrieve()
                 .bodyToMono(BaseRest.class);

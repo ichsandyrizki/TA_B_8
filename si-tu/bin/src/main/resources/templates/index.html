@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <object th:include="fragments/fragment :: header" th:remove="tag"></object>
+<!--    <object th:include="fragments/fragment :: css" th:remove="tag"></object>-->
+<!--    <object th:include="fragments/fragment :: js" th:remove="tag"></object>-->
+</head>
+
+<body>
+    <nav th:replace="fragments/fragment :: navbar"></nav>
+    <!--**********************************
+    Main wrapper start
+    ***********************************-->
+    <div id="main-wrapper">
+        <!--**********************************
+            Content body start
+        ***********************************-->
+        <div th:replace="fragments/fragment :: sidebar"></div>
+        <div class="content-body">
+
+            <div class="container-fluid mt-3">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card gradient-8">
+                            <div class="card-body">
+                                <h1 style="color:white">Hello <b style="color:white" th:text="${#httpServletRequest.remoteUser}"></b>!</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="card gradient-1">
+                            <div class="card-body">
+                                <h3 class="card-title text-white">Pengajuan Surat</h3>
+                                <div class="d-inline-block">
+                                    <h2 class="text-white" th:text="${jmlSurat}"></h2>
+                                    <p class="text-white mb-0">Nov - Des 2019</p>
+                                </div>
+                                <span class="float-right display-5 opacity-5"><i class="fa fa-envelope"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="card gradient-2">
+                            <div class="card-body">
+                                <h3 class="card-title text-white">Lowongan</h3>
+                                <div class="d-inline-block">
+                                    <h2 class="text-white" th:text="${jmlLowongan}"></h2>
+                                    <p class="text-white mb-0">Nov - Des 2019</p>
+                                </div>
+                                <span class="float-right display-5 opacity-5"><i class="fa fa-id-card"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="card gradient-3">
+                            <div class="card-body">
+                                <h3 class="card-title text-white">User</h3>
+                                <div class="d-inline-block">
+                                    <h2 class="text-white" th:text="${jmlUser}"></h2>
+                                    <p class="text-white mb-0">Nov - Des 2019</p>
+                                </div>
+                                <span class="float-right display-5 opacity-5"><i class="fa fa-users"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="card gradient-4">
+                            <div class="card-body">
+                                <h3 class="card-title text-white">Customer Satisfaction</h3>
+                                <div class="d-inline-block">
+                                    <h2 class="text-white">99%</h2>
+                                    <p class="text-white mb-0">Jan - March 2019</p>
+                                </div>
+                                <span class="float-right display-5 opacity-5"><i class="fa fa-heart"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- #/ container -->
+        </div>
+        <!--**********************************
+            Content body end
+        ***********************************-->
+        
+        
+        <!--**********************************
+            Footer start
+        ***********************************-->
+        <div class="footer">
+            <div class="copyright">
+                <p>Copyright &copy; Designed & Developed by <a href="https://github.com/ichsandyrizki/TA_B_8">APAP Kelompok B8 SITU</a> 2019</p>
+            </div>
+        </div>
+        <!--**********************************
+            Footer end
+        ***********************************-->
+    </div>
+    <!--**********************************
+        Main wrapper end
+    ***********************************-->
+</body>
+<footer>
+    <nav th:replace="fragments/fragment :: foot"></nav>
+</footer>
+
+</html>
