@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import reactor.core.publisher.Mono;
+import tugaskelompokb8.apap.situ.model.JenisLowonganModel;
 import tugaskelompokb8.apap.situ.model.LowonganModel;
 import tugaskelompokb8.apap.situ.repository.LowonganDb;
 import tugaskelompokb8.apap.situ.rest.BaseResponse;
@@ -98,6 +99,18 @@ public class LowonganServiceImpl implements LowonganService {
 
     @Override
     public void createLowongan(int jumlah){
+        boolean pustakawanAda = false;
+        for(int i = 0; i< jenisLowonganService.getJenisList().size(); i++){
+            if(jenisLowonganService.getJenisList().get(i).equals("Pustakawan")){
+                pustakawanAda = true;
+            }
+        }
+        if(!pustakawanAda){
+            JenisLowonganModel jenisLowonganModel = new JenisLowonganModel();
+            jenisLowonganModel.setKeterangan("Pustakawan");
+            jenisLowonganModel.setNama("Pustakawan");
+            jenisLowonganService.addJenisLowongan(jenisLowonganModel);
+        }
         LowonganModel lowonganPustakawan = new LowonganModel();
         lowonganPustakawan.setUser(userService.getUserCurrentLoggedIn());
         lowonganPustakawan.setJumlah(5 - jumlah);
@@ -105,7 +118,7 @@ public class LowonganServiceImpl implements LowonganService {
         lowonganPustakawan.setJudul("Lowongan Pustakawan");
         lowonganPustakawan.setTanggalDibuka(Date.valueOf(LocalDate.now()));
         lowonganPustakawan.setTanggalDitutup(Date.valueOf(LocalDate.now().plusMonths(1)));
-        lowonganPustakawan.setJenisLowongan(jenisLowonganService.getJenisByNama(("pustakawan").toLowerCase()));
+        lowonganPustakawan.setJenisLowongan(jenisLowonganService.getJenisByNama(("Pustakawan")));
         lowonganService.addLowongan(lowonganPustakawan);
     }
 }

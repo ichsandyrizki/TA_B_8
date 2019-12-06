@@ -64,7 +64,6 @@ public class UserController {
 				model.addAttribute("passIsValid",false);
 			}
 		}
-
 		model.addAttribute("user", userSivitasModel);
 		model.addAttribute("listRole", roleDb.findAll());
 		model.addAttribute("userIsExist", userIsExist);

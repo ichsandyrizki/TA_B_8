@@ -75,10 +75,10 @@
             </div>
             <div class="header-left">
                 <div class="input-group icons">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text bg-transparent border-0 pr-2 pr-sm-3" id="basic-addon1"><i class="mdi mdi-magnify"></i></span>
-                    </div>
-                    <input type="search" class="form-control" placeholder="Search Dashboard" aria-label="Search Dashboard">
+<!--                    <div class="input-group-prepend">-->
+<!--                        <span class="input-group-text bg-transparent border-0 pr-2 pr-sm-3" id="basic-addon1"><i class="mdi mdi-magnify"></i></span>-->
+<!--                    </div>-->
+<!--                    <input type="search" class="form-control" placeholder="Search Dashboard" aria-label="Search Dashboard">-->
                     <div class="drop-down animated flipInX d-md-none">
                         <form action="#">
                             <input type="text" class="form-control" placeholder="Search">
@@ -91,7 +91,7 @@
                     <li class="icons dropdown">
                         <div class="user-img c-pointer position-relative"   data-toggle="dropdown">
                             <span class="activity active"></span>
-                            <img src="images/user/1.png" height="40" width="40" alt="">
+                            <img th:src="@{/images/user/1.png}" height="40" width="40" alt="">
                         </div>
                         <div class="drop-down dropdown-profile animated fadeIn dropdown-menu">
                             <div class="dropdown-content-body">
@@ -122,11 +122,11 @@
     <div class="nk-sidebar">
         <div class="nk-nav-scroll">
             <ul class="metismenu" id="menu">
-                <li>
-                    <a th:href="@{/}" aria-expanded="false">
-                        <i class="icon-speedometer menu-icon"></i><span class="nav-text">Dashboard</span>
-                    </a>
-                </li>
+<!--                <li>-->
+<!--                    <a th:href="@{/}" aria-expanded="false">-->
+<!--                        <i class="icon-speedometer menu-icon"></i><span class="nav-text">Dashboard</span>-->
+<!--                    </a>-->
+<!--                </li>-->
                 <li>
                     <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                         <i class="icon-envelope menu-icon"></i> <span class="nav-text">Surat</span>
@@ -148,7 +148,7 @@
                 </li>
                 <li>
                     <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                        <i class="icon-notebook menu-icon"></i> <span class="nav-text">Peminjaman</span>
+                        <i class="icon-key menu-icon"></i> <span class="nav-text">Peminjaman</span>
                     </a>
                     <ul aria-expanded="false">
                         <li><a th:href="@{/pinjaman/tambah}">Tambah Pinjaman</a></li>
