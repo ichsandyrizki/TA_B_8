@@ -62,7 +62,7 @@ public class PengajuanSuratRestController {
 	
 	
 	@PostMapping(value="pengajuanSurat/add")
-	public PengajuanSuratModel createPengjuanSurat(@Valid @RequestBody PengajuanSuratPostDetail pengajuan, 
+	public BaseResponse<PengajuanSuratDetail> createPengjuanSurat(@Valid @RequestBody PengajuanSuratPostDetail pengajuan, 
 			BindingResult bindingResult) {
 	
 		if(bindingResult.hasFieldErrors()) {
@@ -81,7 +81,20 @@ public class PengajuanSuratRestController {
 			Date curr = new Date(nows.getTime());
 				        
 	        pengajuanBaru.setTanggalPengajuan(curr);
-			return pengajuanSuratRestService.createPengajuan(pengajuanBaru);
+			PengajuanSuratModel newPengajuan =  pengajuanSuratRestService.createPengajuan(pengajuanBaru);
+			
+			PengajuanSuratDetail pengajuanResponse = new PengajuanSuratDetail();
+			pengajuanResponse.setIdUser(userDb.findByUsername("sandi.bhirama").getIdUser());
+			pengajuanResponse.setJenisSurat(jenisSuratDb.findByIdJenisSurat(pengajuan.getJenisSurat()).getNama());
+			pengajuanResponse.setKeterangan(pengajuan.getKeterangan());
+			pengajuanResponse.setStatus(0);
+			
+			BaseResponse<PengajuanSuratDetail> response = new BaseResponse<>();
+			response.setMessage("success");
+			response.setStatus(200);
+			response.setResult(pengajuanResponse);
+			
+			
 		}
 	}
 	
