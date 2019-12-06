@@ -60,6 +60,15 @@ public class LowonganController {
     @RequestMapping(value = "/lowongan/add", method = RequestMethod.POST)
     private String addLowonganSubmit(@ModelAttribute LowonganModel lowongan, Model model){
         lowongan.setUser(userService.getUserCurrentLoggedIn());
+        if(lowongan.getTanggalDibuka().compareTo(lowongan.getTanggalDitutup()) > 0 ){
+            model.addAttribute("wrongDate", true);
+            String message = "Tanggal ditutup tidak boleh sebelum tanggal dibuka !";
+            model.addAttribute("message", message);
+            List<LowonganModel> listLowongan = lowonganService.getLowonganList();
+            model.addAttribute("listLowongan", listLowongan);
+            model.addAttribute("lowongan", lowongan);
+            return "form-add-lowongan";
+        }
         lowonganService.addLowongan(lowongan);
         List<LowonganModel> listLowongan = lowonganService.getLowonganList();
         model.addAttribute("listLowongan", listLowongan);
@@ -95,7 +104,6 @@ public class LowonganController {
     		@ModelAttribute LowonganModel lowongan, Model model) {
     	lowongan.setUser(userService.getUserCurrentLoggedIn());
     	lowonganService.changeLowongan(lowongan, idLowongan);
-    	
     	List<JenisLowonganModel> listJenisLowongan = jenisLowonganService.getJenisList();
         List<LowonganModel> listLowongan = lowonganService.getLowonganList();
         LowonganModel newLowongan = new LowonganModel();

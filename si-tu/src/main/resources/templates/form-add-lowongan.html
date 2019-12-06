@@ -36,6 +36,9 @@ Main wrapper start
                         <div class="card-body">
                             <h4 class="card-title">Buat Lowongan</h4>
                             <div class="basic-form">
+                                <div th:if="${wrongDate}" class="alert alert-danger" role="alert">
+                                    <b th:text="${message}"></b>
+                                </div>
                                 <form th:action="@{/lowongan/add}" th:object="${lowongan}" method="POST">
                                     <div class="form-group">
                                         <input type="text" name="judul" class="form-control input-rounded" placeholder="Judul">
