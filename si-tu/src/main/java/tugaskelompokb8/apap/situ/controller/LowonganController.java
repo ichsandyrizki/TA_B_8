@@ -86,7 +86,7 @@ public class LowonganController {
         List<LowonganModel> listLowongan = lowonganService.getLowonganList();
     	
         if(userService.getUserCurrentLoggedIn() != lowongan.getUser()) {
-    		model.addAttribute("message", "user tidak dapat mengubah lowongan");
+    		model.addAttribute("message", "User tidak dapat mengubah lowongan");
     		return "lowongan-opened";
     	}
         if(currDate.compareTo(openDate) > 0 || currDate.compareTo(openDate) == 0) {
