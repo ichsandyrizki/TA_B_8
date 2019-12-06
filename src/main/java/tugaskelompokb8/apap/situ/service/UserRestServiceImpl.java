@@ -18,7 +18,7 @@ import java.util.*;
 
 import javax.transaction.Transactional;
 
-@Transactional
+
 @Service
 public class UserRestServiceImpl implements UserRestService {
     private final WebClient webClient;
