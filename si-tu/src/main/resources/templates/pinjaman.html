@@ -43,11 +43,11 @@ Main wrapper start
                                 <form th:action="@{/pinjaman/tambah}" th:object="${pinjamanDetail}" method="POST">
                                     <div class="form-group row">
                                         <label class="col-md-3">Jumlah Peminjaman:</label>
-                                        <input id="jumlahPinjaman" name="jumlahPinjaman" type="text" class="form-control col-md-9" th:value="${pinjamanDetail.jumlahPinjaman}">
+                                        <input id="jumlahPinjaman" name="jumlahPinjaman" type="number" class="form-control col-md-9" th:value="${pinjamanDetail.jumlahPinjaman}" required>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-md-3">Tanggal Pengajuan:</label>
-                                        <input id="tanggalPengajuan" name="tanggalPengajuan" type="date" class="form-control col-md-9" th:value="${pinjamanDetail.tanggalPengajuan}">
+                                        <input id="tanggalPengajuan" name="tanggalPengajuan" type="date" class="form-control col-md-9" th:value="${pinjamanDetail.tanggalPengajuan}" required>
                                     </div>
                                     <button class="btn btn-primary">Submit</button>
                                 </form>
