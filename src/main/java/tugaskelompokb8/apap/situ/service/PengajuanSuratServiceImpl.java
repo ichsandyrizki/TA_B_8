@@ -48,7 +48,7 @@ public class PengajuanSuratServiceImpl implements PengajuanSuratService {
     @Override
     public List<String> getAllNomor(){
         List<PengajuanSuratModel> listPengajuan = pengajuanSuratDb.findAll();
-        List<String> listNomor = new ArrayList<>();
+        List<String> listNomor = new ArrayList<String>();
         for(PengajuanSuratModel model : listPengajuan){
             listNomor.add(model.getNomorSurat());
         }
@@ -109,7 +109,7 @@ public class PengajuanSuratServiceImpl implements PengajuanSuratService {
     public List<PengajuanSuratModel> findPengajuanByUser(UserModel user){
         UserModel modelFromDb = userDb.findByIdUser(user.getIdUser());
         List<PengajuanSuratModel> listPengajuan = pengajuanSuratDb.findAll();
-        List<PengajuanSuratModel> listSama = new ArrayList<>();
+        List<PengajuanSuratModel> listSama = new ArrayList<PengajuanSuratModel>();
         for(PengajuanSuratModel model : listPengajuan){
             if (model.getUser() == modelFromDb){
                 listSama.add(model);

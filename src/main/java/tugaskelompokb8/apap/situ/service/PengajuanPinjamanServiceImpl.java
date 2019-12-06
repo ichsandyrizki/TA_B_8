@@ -20,7 +20,7 @@ public class PengajuanPinjamanServiceImpl implements PengajuanPinjamanService {
 
     @Override
     public Mono<String> postPinjamanKoperasi(){
-        MultiValueMap<String, String> data = new LinkedMultiValueMap<>();
+        MultiValueMap<String, String> data = new LinkedMultiValueMap<String, String>();
         data.add("test","test");
         return this.webClient.post().uri("/rest/pinjaman")
                 .syncBody(data)

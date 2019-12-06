@@ -17,8 +17,6 @@ import org.springframework.stereotype.Service;
 import tugaskelompokb8.apap.situ.model.UserModel;
 import tugaskelompokb8.apap.situ.repository.UserDb;
 
-
-@Transactional
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService{
 	
