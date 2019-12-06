@@ -32,6 +32,11 @@ public class PengajuanSuratRestServiceImpl implements PengajuanSuratRestService{
 		pengajuanApi.setStatus(pengajuan.getStatus());
 		return pengajuanApi;
 	}
+	
+	@Override
+	public List<PengajuanSuratModel> getPengajuanList() {
+		return pengajuanSuratDb.findAll();
+	}
 
 
 	@Override

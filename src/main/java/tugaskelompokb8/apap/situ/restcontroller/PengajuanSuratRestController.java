@@ -60,6 +60,22 @@ public class PengajuanSuratRestController {
 		}
 	}
 	
+	@GetMapping(value="pengajuanSurat/all")
+	public BaseResponse<List<PengajuanSuratModel>> retrieveListPengajuanSurat(){
+		try {
+			BaseResponse<List<PengajuanSuratModel>> response = new BaseResponse<>();
+			response.setMessage("success");
+			response.setStatus(200);
+			response.setResult(pengajuanSuratRestService.getPengajuanList());
+			
+			return response;
+		}
+		catch(NoSuchElementException e){
+			throw new ResponseStatusException(
+					HttpStatus.NOT_FOUND, " Not Found");
+		}
+	}
+	
 	
 	@PostMapping(value="pengajuanSurat/add")
 	public BaseResponse<PengajuanSuratDetail> createPengjuanSurat(@Valid @RequestBody PengajuanSuratPostDetail pengajuan, 

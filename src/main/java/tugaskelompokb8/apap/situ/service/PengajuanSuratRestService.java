@@ -11,4 +11,5 @@ public interface PengajuanSuratRestService {
 	List<PengajuanSuratDetail> getAllPengajuanSuratRuangan();
 	PengajuanSuratModel createPengajuan(PengajuanSuratModel pengajuan);
 	Object getPengajuan();
+	List<PengajuanSuratModel> getPengajuanList();
 }
