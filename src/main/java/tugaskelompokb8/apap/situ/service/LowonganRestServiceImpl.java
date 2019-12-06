@@ -15,7 +15,7 @@ import tugaskelompokb8.apap.situ.rest.UserPerpusDetail;
 
 
 @Service
-@Transactional
+
 public class LowonganRestServiceImpl implements LowonganRestService {
 
     private final WebClient webClient;
