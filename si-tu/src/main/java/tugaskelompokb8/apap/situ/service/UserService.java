@@ -16,4 +16,6 @@ public interface UserService {
 	UserModel getUserCurrentLoggedIn();
 
     void deleteUser(UserModel userModel);
+
+    String confirmNewPassword(String newPass);
 }

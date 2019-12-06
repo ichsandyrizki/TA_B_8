@@ -32,11 +32,11 @@ public class PageController {
 	
     @RequestMapping("/")
     private String home(Model model){
-//        if(userService.getUserCurrentLoggedIn().getRole().getNama().equals("Admin TU")){
-//            model.addAttribute("isAdmin", true);
-//        }else{
-//            model.addAttribute("isAdmin", false);
-//        }
+        if(userService.getUserCurrentLoggedIn().getRole().getNama().equals("Admin TU")){
+            model.addAttribute("isAdmin", true);
+        }else{
+            model.addAttribute("isAdmin", false);
+        }
         model.addAttribute("jmlUser", userService.getListUser().size());
         model.addAttribute("jmlSurat", pengajuanSuratService.getPengajuanSuratList().size());
         model.addAttribute("jmlLowongan",lowonganService.getLowonganList().size());
