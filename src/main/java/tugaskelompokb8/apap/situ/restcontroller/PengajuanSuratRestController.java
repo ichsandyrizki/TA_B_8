@@ -94,6 +94,8 @@ public class PengajuanSuratRestController {
 			response.setStatus(200);
 			response.setResult(pengajuanResponse);
 			
+			return response;
+			
 			
 		}
 	}
