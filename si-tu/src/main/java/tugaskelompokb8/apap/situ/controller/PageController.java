@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import tugaskelompokb8.apap.situ.model.LowonganModel;
 import tugaskelompokb8.apap.situ.model.PasswordModel;
+import tugaskelompokb8.apap.situ.model.PengajuanSuratModel;
 import tugaskelompokb8.apap.situ.repository.PengajuanSuratDb;
 import tugaskelompokb8.apap.situ.repository.RoleDb;
 import tugaskelompokb8.apap.situ.repository.UserDb;
@@ -16,6 +17,8 @@ import tugaskelompokb8.apap.situ.service.LowonganService;
 import tugaskelompokb8.apap.situ.service.LowonganServiceImpl;
 import tugaskelompokb8.apap.situ.service.PengajuanSuratService;
 import tugaskelompokb8.apap.situ.service.UserService;
+
+import java.util.List;
 
 @Controller
 public class PageController {
@@ -32,11 +35,14 @@ public class PageController {
 	
     @RequestMapping("/")
     private String home(Model model){
-//        if(userService.getUserCurrentLoggedIn().getRole().getNama().equals("Admin TU")){
-//            model.addAttribute("isAdmin", true);
-//        }else{
-//            model.addAttribute("isAdmin", false);
-//        }
+        if(userService.getUserCurrentLoggedIn().getRole().getNama().equals("Admin TU")){
+            model.addAttribute("isAdmin", true);
+        }else{
+            model.addAttribute("isAdmin", false);
+        }
+        List<PengajuanSuratModel> listSurat = userService.getUserCurrentLoggedIn().getListPengajuanSurat();
+        model.addAttribute("listSurat", listSurat);
+        model.addAttribute("role", userService.getUserCurrentLoggedIn().getRole().getNama());
         model.addAttribute("jmlUser", userService.getListUser().size());
         model.addAttribute("jmlSurat", pengajuanSuratService.getPengajuanSuratList().size());
         model.addAttribute("jmlLowongan",lowonganService.getLowonganList().size());

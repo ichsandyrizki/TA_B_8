@@ -50,11 +50,11 @@ public class UserController {
 	@RequestMapping("/addUser")
 	private String addUser(@RequestParam(value = "userIsExist", required=false) boolean cassieyah, Model model) {
 		UserSivitasModel userSivitasModel = new UserSivitasModel();
-		if(userService.getUserCurrentLoggedIn().getRole().equals("Admin TU")){
-			model.addAttribute("isAdmin", true);
-		}else{
-			model.addAttribute("isAdmin", false);
-		}
+//		if(userService.getUserCurrentLoggedIn().getRole().equals("Admin TU")){
+//			model.addAttribute("isAdmin", true);
+//		}else{
+//			model.addAttribute("isAdmin", false);
+//		}
 		model.addAttribute("user", userSivitasModel);
 		model.addAttribute("listRole", roleDb.findAll());
 		model.addAttribute("userIsExist", cassieyah);

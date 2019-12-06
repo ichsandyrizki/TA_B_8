@@ -44,8 +44,8 @@ public class PengajuanSuratController {
     public String addPengajuanSuratFormPage(Model model) {
         PengajuanSuratModel suratBaru = new PengajuanSuratModel();
         List<JenisSuratModel> listJenisSurat = jenisSuratService.getJenisSuratList();
-        List<PengajuanSuratModel> pengajuanSuratModelList = pengajuanSuratService.getPengajuanSuratList();
-        model.addAttribute("pengajuan_list",pengajuanSuratModelList);
+//        List<PengajuanSuratModel> pengajuanSuratModelList = pengajuanSuratService.getPengajuanSuratList();
+//        model.addAttribute("pengajuan_list",pengajuanSuratModelList);
         model.addAttribute("surat", suratBaru);
         model.addAttribute("listJenisSurat", listJenisSurat);
         return "form-pengajuan-surat";
@@ -60,10 +60,10 @@ public class PengajuanSuratController {
         surat.setTanggalPengajuan(Date.valueOf(LocalDate.now()));
         List<JenisSuratModel> listJenisSurat = jenisSuratService.getJenisSuratList();
         pengajuanSuratService.addPengajuanSurat(surat);
-        List<PengajuanSuratModel> pengajuanSuratModelList = pengajuanSuratService.getPengajuanSuratList();
+//        List<PengajuanSuratModel> pengajuanSuratModelList = pengajuanSuratService.getPengajuanSuratList();
         model.addAttribute("surat", surat);
         model.addAttribute("listJenisSurat", listJenisSurat);
-        model.addAttribute("pengajuan_list", pengajuanSuratModelList);
+//        model.addAttribute("pengajuan_list", pengajuanSuratModelList);
         return "form-pengajuan-surat";
     }
 
