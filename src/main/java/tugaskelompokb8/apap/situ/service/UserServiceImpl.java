@@ -5,6 +5,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import tugaskelompokb8.apap.situ.model.RoleModel;
 import tugaskelompokb8.apap.situ.model.UserModel;
@@ -14,10 +15,11 @@ import tugaskelompokb8.apap.situ.rest.UserSivitasModel;
 
 import java.util.List;
 
-import javax.transaction.Transactional;
 
-@Transactional
+
+
 @Service
+@Transactional
 public class UserServiceImpl implements UserService{
 
 	@Autowired

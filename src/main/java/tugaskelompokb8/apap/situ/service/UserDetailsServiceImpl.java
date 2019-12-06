@@ -3,7 +3,7 @@ package tugaskelompokb8.apap.situ.service;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.transaction.Transactional;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -13,13 +13,15 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import tugaskelompokb8.apap.situ.model.UserModel;
 import tugaskelompokb8.apap.situ.repository.UserDb;
 
 
-@Transactional
+
 @Service
+@Transactional
 public class UserDetailsServiceImpl implements UserDetailsService{
 	
 	@Autowired
