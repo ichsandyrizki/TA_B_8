@@ -25,7 +25,7 @@ import org.hibernate.annotations.Type;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name="user")
+@Table(name="user_tu")
 public class UserModel implements Serializable{
 	@Id
 	@GeneratedValue(generator = "system-uuid")
