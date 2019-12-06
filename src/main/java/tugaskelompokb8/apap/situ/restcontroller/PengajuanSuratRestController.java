@@ -76,7 +76,7 @@ public class PengajuanSuratRestController {
 			pengajuanBaru.setTanggalDisetujui(null);
 	        pengajuanBaru.setStatus(0);
 	        pengajuanBaru.setNomorSurat("0");
-	        pengajuanBaru.setUser(userDb.findByIdUser("1"));  
+	        pengajuanBaru.setUser(userDb.findByUsername("sandi.bhirama"));  
 			java.util.Date nows = new java.util.Date();
 			Date curr = new Date(nows.getTime());
 				        
