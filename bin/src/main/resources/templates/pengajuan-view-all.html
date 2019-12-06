@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <object th:include="fragments/fragment :: header" th:remove="tag"></object>
+    <!--    <object th:include="fragments/fragment :: css" th:remove="tag"></object>-->
+    <!--    <object th:include="fragments/fragment :: js" th:remove="tag"></object>-->
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<!--**********************************
+Main wrapper start
+***********************************-->
+<div id="main-wrapper">
+    <!--**********************************
+        Content body start
+    ***********************************-->
+    <div th:replace="fragments/fragment :: sidebar"></div>
+    <div class="content-body">
+
+        <div class="row page-titles mx-0">
+            <div class="col p-md-0">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">Pengajuan Surat</a></li>
+                    <li class="breadcrumb-item active"><a th:href="@{/}" >Home</a></li>
+                </ol>
+            </div>
+        </div>
+        <div th:if="${message}" id="alert" class="alert alert-dismissible fade show d-flex justify-content-center" th:classappend="${type}">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <span th:text="${message}" th:remove="tag"></span>
+        </div>
+
+        <div th:if="${#httpServletRequest.userPrincipal.authorities[0].toString()=='Admin TU'}"  class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-xs mb-0">
+                                <thead>
+                                <tr>
+                                    <th scope="col">No</th>
+                                    <th scope="col">Nomor Surat</th>
+                                    <th scope="col">Keterangan</th>
+                                    <th scope="col">status</th>
+                                    <th scope="col"></th>
+                                </tr>
+                                </thead>
+                                <tbody th:each="pengajuanSurat, iterationStatus : ${pengajuan_list}">
+                                <tr>
+                                    <th scope="row" th:text="${iterationStatus.count}"></th>
+                                    <td th:text="${pengajuanSurat.nomorSurat}"></td>
+                                    <td th:text="${pengajuanSurat.keterangan}"></td>
+                                    <td th:switch="${pengajuanSurat.status}">
+                                        <p th:case="0">Menunggu Persetujuan</p>
+                                        <p th:case="1">Ditolak</p>
+                                        <p th:case="2">Disetujui</p>
+                                        <p th:case="3">Diproses</p>
+                                        <p th:case="4">Selesai</p>
+                                    </td>
+                                    <td>
+                                        <div th:if="${pengajuanSurat.status ==0}" class="btn">
+                                            <button class="btn btn-sm btn-danger">
+                                                <a th:href="@{/pengajuanSurat/delete/}+${pengajuanSurat.idPengajuanSurat}" style="color:white" method="POST">Hapus</a>
+                                            </button>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div th:if="${pengajuanSurat.status ==2}" class="btn">
+                                            <button class="btn btn-primary">
+                                                <a th:href="@{/pengajuanSurat/update/}+${pengajuanSurat.idPengajuanSurat}" style="color:white" method="POST">Update</a>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div th:if="${#httpServletRequest.userPrincipal.authorities[0].toString()=='Kepala Sekolah'}"  class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-xs mb-0">
+                                <thead>
+                                <tr>
+                                    <th scope="col">No</th>
+                                    <th scope="col">Nomor Surat</th>
+                                    <th scope="col">Keterangan</th>
+                                    <th scope="col">status</th>
+                                    <th scope="col"></th>
+                                </tr>
+                                </thead>
+                                <tbody th:each="pengajuanSurat, iterationStatus : ${pengajuan_list}">
+                                <tr>
+                                    <th scope="row" th:text="${iterationStatus.count}"></th>
+                                    <td th:text="${pengajuanSurat.nomorSurat}"></td>
+                                    <td th:text="${pengajuanSurat.keterangan}"></td>
+                                    <td th:switch="${pengajuanSurat.status}">
+                                        <p th:case="0">Menunggu Persetujuan</p>
+                                        <p th:case="1">Ditolak</p>
+                                        <p th:case="2">Disetujui</p>
+                                        <p th:case="3">Diproses</p>
+                                        <p th:case="4">Selesai</p>
+                                    </td>
+                                    <td>
+                                        <div th:if="${pengajuanSurat.status ==0}" class="btn">
+                                            <button class="btn btn-sm btn-danger">
+                                                <a th:href="@{/pengajuanSurat/delete/}+${pengajuanSurat.idPengajuanSurat}" style="color:white" method="POST">Hapus</a>
+                                            </button>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div th:if="${pengajuanSurat.status ==0}" class="btn">
+                                            <button class="btn btn-primary">
+                                                <a th:href="@{/pengajuanSurat/update/}+${pengajuanSurat.idPengajuanSurat}" style="color:white" method="POST">Update</a>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div th:if="${#httpServletRequest.userPrincipal.authorities[0].toString()=='Guru'}"  class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-xs mb-0">
+                                <thead>
+                                <tr>
+                                    <th scope="col">No</th>
+                                    <th scope="col">Nomor Surat</th>
+                                    <th scope="col">Keterangan</th>
+                                    <th scope="col">status</th>
+                                    <th scope="col"></th>
+                                </tr>
+                                </thead>
+                                <tbody th:each="pengajuanSurat, iterationStatus : ${pengajuan_list}">
+                                <tr>
+                                    <th scope="row" th:text="${iterationStatus.count}"></th>
+                                    <td th:text="${pengajuanSurat.nomorSurat}"></td>
+                                    <td th:text="${pengajuanSurat.keterangan}"></td>
+                                    <td th:switch="${pengajuanSurat.status}">
+                                        <p th:case="0">Menunggu Persetujuan</p>
+                                        <p th:case="1">Ditolak</p>
+                                        <p th:case="2">Disetujui</p>
+                                        <p th:case="3">Diproses</p>
+                                        <p th:case="4">Selesai</p>
+                                    </td>
+                                    <td>
+                                        <div th:if="${pengajuanSurat.status ==0}" class="btn">
+                                            <button class="btn btn-sm btn-danger">
+                                                <a th:href="@{/pengajuanSurat/delete/}+${pengajuanSurat.idPengajuanSurat}" style="color:white" method="POST">Hapus</a>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div th:if="${#httpServletRequest.userPrincipal.authorities[0].toString()=='Siswa'}"  class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-xs mb-0">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">No</th>
+                                        <th scope="col">Nomor Surat</th>
+                                        <th scope="col">Keterangan</th>
+                                        <th scope="col">status</th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody th:each="pengajuanSurat, iterationStatus : ${pengajuan_list}">
+                                    <tr>
+                                        <th scope="row" th:text="${iterationStatus.count}"></th>
+                                        <td th:text="${pengajuanSurat.nomorSurat}"></td>
+                                        <td th:text="${pengajuanSurat.keterangan}"></td>
+                                        <td th:switch="${pengajuanSurat.status}">
+                                            <p th:case="0">Menunggu Persetujuan</p>
+                                            <p th:case="1">Ditolak</p>
+                                            <p th:case="2">Disetujui</p>
+                                            <p th:case="3">Diproses</p>
+                                            <p th:case="4">Selesai</p>
+                                        </td>
+                                        <td>
+                                            <div th:if="${pengajuanSurat.status ==0}" class="btn">
+                                                <button class="btn btn-sm btn-danger">
+                                                    <a th:href="@{/pengajuanSurat/delete/}+${pengajuanSurat.idPengajuanSurat}" style="color:white" method="POST">Hapus</a>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+    <!-- #/ container -->
+</div>
+<!--**********************************
+    Content body end
+***********************************-->
+
+
+<!--**********************************
+    Footer start
+***********************************-->
+<div class="footer">
+    <div class="copyright">
+        <p>Copyright &copy; Designed & Developed by <a href="https://themeforest.net/user/quixlab">Quixlab</a> 2018</p>
+    </div>
+</div>
+<!--**********************************
+    Footer end
+***********************************-->
+</div>
+<!--**********************************
+    Main wrapper end
+***********************************-->
+</body>
+<footer>
+    <nav th:replace="fragments/fragment :: foot"></nav>
+</footer>
+
+</html>

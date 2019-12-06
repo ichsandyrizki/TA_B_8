@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <object th:include="fragments/fragment :: header" th:remove="tag"></object>
+    <!--    <object th:include="fragments/fragment :: css" th:remove="tag"></object>-->
+    <!--    <object th:include="fragments/fragment :: js" th:remove="tag"></object>-->
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<!--**********************************
+Main wrapper start
+***********************************-->
+<div id="main-wrapper">
+    <!--**********************************
+        Content body start
+    ***********************************-->
+    <div th:replace="fragments/fragment :: sidebar"></div>
+    <div class="content-body">
+
+        <div class="row page-titles mx-0">
+            <div class="col p-md-0">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">Pengajuan Surat</a></li>
+                    <li class="breadcrumb-item active"><a th:href="@{/}" >Home</a></li>
+                </ol>
+            </div>
+        </div>
+        <!-- row -->
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Ubah Status</h4>
+                            <div class="basic-form">
+                                <form th:action="@{/pengajuanSurat/update/}+${pengajuanSurat.idPengajuanSurat}" th:object="${pengajuanSurat}" method="POST">
+
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 col-form-label" for="exampleFormControlSelect1">Status Peminjaman</label>
+                                        <div class="col-sm-10">
+                                            <select name="status" class="form-control" id="exampleFormControlSelect1">
+                                                <option th:value="1">ditolak</option>
+                                                <option th:value="2">disetujui</option>
+                                                <option th:value="3">diproses</option>
+                                                <option th:value="4">selesai</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <button class="btn btn-sm btn-primary" type="submit" >Submit</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- #/ container -->
+        </div>
+        <!--**********************************
+            Content body end
+        ***********************************-->
+
+
+        <!--**********************************
+            Footer start
+        ***********************************-->
+        <div class="footer">
+            <div class="copyright">
+                <p>Copyright &copy; Designed & Developed by <a href="https://themeforest.net/user/quixlab">Quixlab</a> 2018</p>
+            </div>
+        </div>
+        <!--**********************************
+            Footer end
+        ***********************************-->
+    </div>
+    <!--**********************************
+        Main wrapper end
+    ***********************************-->
+</div>
+</body>
+<footer>
+    <nav th:replace="fragments/fragment :: foot"></nav>
+</footer>
+
+</html>
