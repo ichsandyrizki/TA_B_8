@@ -76,10 +76,10 @@ public class LowonganController {
     	List<JenisLowonganModel> listJenisLowongan = jenisLowonganService.getJenisList();
         List<LowonganModel> listLowongan = lowonganService.getLowonganList();
     	
-//        if(userService.getUserCurrentLoggedIn() != lowongan.getUser()) {
-//    		model.addAttribute("message", "user tidak dapat mengubah lowongan");
-//    		return "lowongan-opened";
-//    	}
+        if(userService.getUserCurrentLoggedIn() != lowongan.getUser()) {
+    		model.addAttribute("message", "user tidak dapat mengubah lowongan");
+    		return "lowongan-opened";
+    	}
         if(currDate.compareTo(openDate) > 0 || currDate.compareTo(openDate) == 0) {
     		model.addAttribute("message", "Lowongan telah dibuka");
     		return "lowongan-opened";
