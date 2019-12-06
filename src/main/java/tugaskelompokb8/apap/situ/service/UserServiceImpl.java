@@ -14,6 +14,9 @@ import tugaskelompokb8.apap.situ.rest.UserSivitasModel;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
+@Transactional
 @Service
 public class UserServiceImpl implements UserService{
 

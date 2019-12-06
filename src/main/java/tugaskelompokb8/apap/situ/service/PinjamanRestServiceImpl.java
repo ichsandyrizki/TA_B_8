@@ -14,6 +14,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+@Transactional
 @Service
 public class PinjamanRestServiceImpl implements PinjamanRestService{
 
