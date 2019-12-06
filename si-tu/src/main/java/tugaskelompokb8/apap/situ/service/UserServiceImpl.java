@@ -73,4 +73,34 @@ public class UserServiceImpl implements UserService{
 		userDb.delete(userModel);
 	}
 
+	@Override
+	public String confirmNewPassword(String newPass){
+		String message = "";
+		boolean checkDigit = false;
+		boolean checkLetter = false;
+
+		//Mengecek apakah password mengandung digit atau tidak
+		for(char x : newPass.toCharArray()){
+			if(Character.isDigit(x)){
+				checkDigit = true;
+			}
+		}
+		if(!(checkDigit == true)){
+			message = "Password minimal mengandung 1 buah angka";
+		}
+
+		//Mengecek apakah password mengandung huruf atau tidak
+		checkLetter = newPass.matches(".*[a-zA-Z]+.*");
+		if(!(checkLetter == true )){
+			message = "Password minimal harus terdiri dari 1 huruf";
+		}
+
+		//Mengecek minimal terdapat minimal 8 karakter
+		if(newPass.length() < 8){
+			message ="Password minimal terdiri dari 8 karakter";
+		}
+
+		return message;
+	}
+
 }
