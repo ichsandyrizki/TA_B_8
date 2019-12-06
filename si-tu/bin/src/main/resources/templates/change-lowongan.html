@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <object th:include="fragments/fragment :: header" th:remove="tag"></object>
+    <!--    <object th:include="fragments/fragment :: css" th:remove="tag"></object>-->
+    <!--    <object th:include="fragments/fragment :: js" th:remove="tag"></object>-->
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<!--**********************************
+Main wrapper start
+***********************************-->
+<div id="main-wrapper">
+    <!--**********************************
+        Content body start
+    ***********************************-->
+    <div th:replace="fragments/fragment :: sidebar"></div>
+    <div class="content-body">
+
+        <div class="row page-titles mx-0">
+            <div class="col p-md-0">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">Jenis Lowongan</a></li>
+                    <li class="breadcrumb-item active"><a th:href="@{/}" >Home</a></li>
+                </ol>
+            </div>
+        </div>
+        <!-- row -->
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Ubah Lowongan</h4>
+                            <div class="basic-form">
+                                <form th:action="@{/lowongan/update/} + ${lowongan.idLowongan}" th:object="${lowongan}" method="POST">
+                                    <div class="form-group">                      
+                                        <input type="hidden" name="idLowongan" class="form-control input-rounded" placeholder="idLowongan" readonly="true" th:field="*{idLowongan}">
+                                    </div>
+                                    <div class="form-group">
+                                    	<p>Judul</p>
+                                        <input type="text" name="judul" class="form-control input-rounded" placeholder="Judul" readonly="true" th:field="*{judul}">
+                                    </div>
+                                    <div class="form-group">
+                                    	<p>Tanggal Dibuka</p>
+                                        <input type="date" name="tanggalDibuka" class="form-control input-rounded" placeholder="Tanggal Dibuka" th:field="*{tanggalDibuka}">
+                                    </div>
+                                    <div class="form-group">
+                                    	<p>Tanggal Ditutup</p>
+                                        <input type="date" name="tanggalDitutup" class="form-control input-rounded" placeholder="Tanggal Ditutup" th:field="*{tanggalDitutup}">
+                                    </div>
+                                    <div class="form-group">
+                                    	<p>Keterangan</p>
+                                        <input type="text" name="keterangan" class="form-control input-rounded" placeholder="Keterangan" th:field="*{keterangan}">
+                                    </div>
+                                    <div class="form-group">
+                                    	<p>Jumlah</p>
+                                        <input type="number" name="jumlah" class="form-control input-rounded" placeholder="Jumlah" th:field="*{jumlah}">
+                                    </div>
+                                    <div class="form-group">
+                                    	<p>Jenis Lowongan</p>
+                                        <select  id = "jenis_lowongan" th:field="*{jenisLowongan}" class="form-control input-rounded" name="jenis_lowongan" readonly="true" >
+                                            <option th:each="jenis : ${listJenisLowongan}"
+                                                    th:value ="${jenis.idJenisLowongan}"
+                                                    th:text="${jenis.nama}"></option>
+                                        </select>
+                                    </div>
+                                    <button type="submit" class="btn btn-dark">Submit</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    <!--**********************************
+        Content body end
+    ***********************************-->
+
+
+    <!--**********************************
+        Footer start
+    ***********************************-->
+    <div class="footer">
+        <div class="copyright">
+            <p>Copyright &copy; Designed & Developed by <a href="https://github.com/ichsandyrizki/TA_B_8">APAP Kelompok B8 SITU</a> 2019</p>
+        </div>
+    </div>
+    <!--**********************************
+        Footer end
+    ***********************************-->
+</div>
+<!--**********************************
+    Main wrapper end
+***********************************-->
+</body>
+<footer>
+    <nav th:replace="fragments/fragment :: foot"></nav>
+</footer>
+
+</html>

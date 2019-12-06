@@ -38,6 +38,9 @@ Main wrapper start
                             <div th:if="${userIsExist} == true" class="alert alert-danger" role="alert">
                                 <b>Username sudah terdaftar</b>
                             </div>
+                            <div th:if="${passIsValid} == false" class="alert alert-danger" role="alert">
+                                <b th:text="${msg}"></b>
+                            </div>
                             <div class="basic-form">
                                 <form th:action="@{/user/addUser}" th:object="${user}" method="POST">
                                     <input th:field="${user.idUSer}" type="hidden" >

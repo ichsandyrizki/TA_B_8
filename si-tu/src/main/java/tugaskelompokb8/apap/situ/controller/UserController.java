@@ -48,16 +48,26 @@ public class UserController {
 
 
 	@RequestMapping("/addUser")
-	private String addUser(@RequestParam(value = "userIsExist", required=false) boolean cassieyah, Model model) {
+	private String addUser(@RequestParam(value = "userIsExist", required=false) boolean userIsExist,
+						   @RequestParam(value = "message", required = false) String msg,
+						   Model model) {
 		UserSivitasModel userSivitasModel = new UserSivitasModel();
-//		if(userService.getUserCurrentLoggedIn().getRole().equals("Admin TU")){
-//			model.addAttribute("isAdmin", true);
-//		}else{
-//			model.addAttribute("isAdmin", false);
-//		}
+		if(userService.getUserCurrentLoggedIn().getRole().getIdRole()== 2){
+			model.addAttribute("isAdmin", true);
+		}else{
+			model.addAttribute("isAdmin", false);
+		}
+		if(msg != null){
+			if(msg.equals("")){
+				model.addAttribute("passIsValid", true);
+			}else{
+				model.addAttribute("passIsValid",false);
+			}
+		}
 		model.addAttribute("user", userSivitasModel);
 		model.addAttribute("listRole", roleDb.findAll());
-		model.addAttribute("userIsExist", cassieyah);
+		model.addAttribute("userIsExist", userIsExist);
+		model.addAttribute("msg",msg);
 		return "form-add-user";
 	}
 
@@ -69,6 +79,7 @@ public class UserController {
 								 Error error,
 								 RedirectAttributes redirAttr) {
 
+		System.out.println(userService.confirmNewPassword(userSivitas.getPassword()));
 		boolean userIsExist = false;
 		for(int i = 0; i < userService.getListUser().size(); i++){
 			if(userService.getListUser().get(i).getUsername().equals(userSivitas.getUsername())){
@@ -77,19 +88,25 @@ public class UserController {
 			}
 		}
 
-		if(userIsExist == false){
-			UserModel user = userService.addUser(userSivitas);
-			userSivitas.setIdUSer(user.getIdUser());
-			Mono<BaseRest> api = null;
-			if(roleDb.findByIdRole(userSivitas.getIdRole()).getNama().equals("Admin TU")||
-					roleDb.findByIdRole(userSivitas.getIdRole()).getNama().equals("Kepala Sekolah")||
-					roleDb.findByIdRole(userSivitas.getIdRole()).getNama().equals("Guru")||
-					roleDb.findByIdRole(userSivitas.getIdRole()).getNama().equals("Siswa")){
-				api = userRestService.registerUser(userSivitas);
-				if(Objects.requireNonNull(api.block()).getStatus() == 200){
-				} else{
-					userService.deleteUser(user);
+		if(userIsExist == false) {
+			if (userService.confirmNewPassword(userSivitas.getPassword()).equals("")) {
+				UserModel user = userService.addUser(userSivitas);
+				userSivitas.setIdUSer(user.getIdUser());
+				Mono<BaseRest> api = null;
+				if (roleDb.findByIdRole(userSivitas.getIdRole()).getNama().equals("Admin TU") ||
+						roleDb.findByIdRole(userSivitas.getIdRole()).getNama().equals("Kepala Sekolah") ||
+						roleDb.findByIdRole(userSivitas.getIdRole()).getNama().equals("Guru") ||
+						roleDb.findByIdRole(userSivitas.getIdRole()).getNama().equals("Siswa")) {
+					api = userRestService.registerUser(userSivitas);
+					if (Objects.requireNonNull(api.block()).getStatus() == 200) {
+						redirAttr.addAttribute("message", "");
+					} else {
+						userService.deleteUser(user);
+					}
 				}
+			} else {
+				String message = userService.confirmNewPassword(userSivitas.getPassword());
+				redirAttr.addAttribute("message", message);
 			}
 		}
 

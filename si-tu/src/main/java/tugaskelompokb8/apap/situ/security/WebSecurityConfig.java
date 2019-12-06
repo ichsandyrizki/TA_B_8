@@ -24,13 +24,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/css/**").permitAll()
                 .antMatchers("/js/**").permitAll()
                 .antMatchers("/changePassword").permitAll()
-                .antMatchers("/user/addUser").hasAnyAuthority("Admin TU")
-                .antMatchers("/pinjaman/**").hasAnyAuthority("Admin TU")
-                .antMatchers("/lowongan/**").hasAnyAuthority("Admin TU")
+                //Akses Admin TU
                 .antMatchers("/jenis-lowongan/**").hasAnyAuthority("Admin TU")
                 .antMatchers("/jenisSurat/**").hasAnyAuthority("Admin TU")
+                .antMatchers("/lowongan/**").hasAnyAuthority("Admin TU")
+                .antMatchers("/pinjaman/**").hasAnyAuthority("Admin TU")
+                .antMatchers("/user/addUser").hasAnyAuthority("Admin TU")
+                //Akses Admin TU, Guru, Siswa
+                .antMatchers("/pengajuanSurat/add").hasAnyAuthority("Admin TU", "Guru", "Siswa")
+                .antMatchers("/pengajuanSurat/delete/**").hasAnyAuthority("Admin TU", "Guru", "Siswa")
+                .antMatchers("/pengajuanSurat/statuses").hasAnyAuthority("Admin TU", "Guru", "Siswa")
+                //Akses Admin TU, Kepala Sekolah
+                .antMatchers("/pengajuanSurat/update/**").hasAnyAuthority("Admin TU","Kepala Sekolah")
+                //Akses API
+                .antMatchers("/api/v1/situ/**").permitAll()
                 .anyRequest().authenticated()
-    //                .anyRequest().permitAll()
+                //.anyRequest().permitAll()
                 .and()
                 .formLogin()
                 .loginPage("/login").permitAll()
