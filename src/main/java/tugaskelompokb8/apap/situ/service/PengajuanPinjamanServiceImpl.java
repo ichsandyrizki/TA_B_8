@@ -2,11 +2,11 @@ package tugaskelompokb8.apap.situ.service;
 
 import tugaskelompokb8.apap.situ.rest.Setting;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
-import javax.transaction.Transactional;
 
 @Service
 @Transactional
