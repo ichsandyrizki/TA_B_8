@@ -38,10 +38,10 @@ Main wrapper start
                             <div class="basic-form">
                                 <form th:action="@{/jenisSurat/add}" th:object="${jenisSurat}" method="POST">
                                     <div class="form-group">
-                                        <input type="text" name="nama" class="form-control input-rounded" placeholder="Jenis Surat">
+                                        <input type="text" name="nama" class="form-control input-rounded" placeholder="Jenis Surat" required="true">
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" name="keterangan" class="form-control input-rounded" placeholder="Keterangan">
+                                        <input type="text" name="keterangan" class="form-control input-rounded" placeholder="Keterangan" required="falsegit">
                                     </div>
                                     <button type="submit" class="btn btn-dark">Submit</button>
                                 </form>
