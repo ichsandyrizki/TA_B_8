@@ -33,7 +33,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 //Akses Admin TU, Guru, Siswa
                 .antMatchers("/pengajuanSurat/add").hasAnyAuthority("Admin TU", "Guru", "Siswa")
                 .antMatchers("/pengajuanSurat/delete/**").hasAnyAuthority("Admin TU", "Guru", "Siswa")
-                .antMatchers("/pengajuanSurat/statuses").hasAnyAuthority("Admin TU", "Guru", "Siswa")
+                .antMatchers("/pengajuanSurat/statuses").hasAnyAuthority("Admin TU", "Guru", "Siswa", "Kepala Sekolah")
                 //Akses Admin TU, Kepala Sekolah
                 .antMatchers("/pengajuanSurat/update/**").hasAnyAuthority("Admin TU","Kepala Sekolah")
                 //Akses API
