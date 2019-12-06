@@ -138,30 +138,45 @@ public class UserController {
             model.addAttribute("role" ,user.getRole());
             model.addAttribute("username", user.getUsername());
 
-            if (user.getRole().getIdRole() < 5) {
+            try{
 
-                UserSivitasModel userModel = new UserSivitasModel();
-                Mono<BaseResponse> respon = userRestService.getUserData(user.getIdUser(), user.getRole().getIdRole());
-                LinkedHashMap<String, String> data = (LinkedHashMap<String, String>) Objects.requireNonNull(respon.block()).getResult();
+				if (user.getRole().getIdRole() < 5) {
+					UserSivitasModel userModel = new UserSivitasModel();
+					Mono<BaseResponse> respon = userRestService.getUserData(user.getIdUser(), user.getRole().getIdRole());
+					LinkedHashMap<String, String> data = (LinkedHashMap<String, String>) Objects.requireNonNull(respon.block()).getResult();
 
-                userModel.setIdRole(user.getRole().getIdRole());
-                userModel.setUsername(user.getUsername());
-                userModel.setNama(data.get("nama"));
-                userModel.setAlamat(data.get("alamat"));
-                if (user.getRole().getIdRole() == 4) {
-                    userModel.setNi(data.get("nis"));
-                } else if (user.getRole().getIdRole() == 2) {
-                    userModel.setNi(data.get("nip"));
-                } else {
-                    userModel.setNi(data.get("nig"));
-                }
-                String tanggal = data.get("tanggalLahir");
-                userModel.setTanggalLahir(new SimpleDateFormat("yyyy-MM-dd").parse(tanggal));
-                userModel.setTempatLahir(data.get("tempatLahir"));
-                userModel.setTelepon(data.get("telepon"));
-                model.addAttribute("user", userModel);
-            }
-            return "profile";
+					userModel.setIdRole(user.getRole().getIdRole());
+					userModel.setUsername(user.getUsername());
+					userModel.setNama(data.get("nama"));
+					userModel.setAlamat(data.get("alamat"));
+					if (user.getRole().getIdRole() == 4) {
+						userModel.setNi(data.get("nis"));
+					} else if (user.getRole().getIdRole() == 2) {
+						userModel.setNi(data.get("nip"));
+					} else {
+						userModel.setNi(data.get("nig"));
+					}
+					String tanggal = data.get("tanggalLahir");
+					userModel.setTanggalLahir(new SimpleDateFormat("yyyy-MM-dd").parse(tanggal));
+					userModel.setTempatLahir(data.get("tempatLahir"));
+					userModel.setTelepon(data.get("telepon"));
+					model.addAttribute("user", userModel);
+					System.out.println("kelar if");
+				}
+				return "profile";
+			}
+            catch(Exception e){
+				UserSivitasModel userModel1 = new UserSivitasModel();
+				userModel1.setAlamat(null);
+				userModel1.setNi(null);
+				userModel1.setNi(null);
+				userModel1.setNi(null);
+				userModel1.setTanggalLahir(null);
+				userModel1.setTempatLahir(null);
+				userModel1.setTelepon(null);
+				model.addAttribute("user", userModel1);
+            	return "profile";
+			}
         }
 
     }
