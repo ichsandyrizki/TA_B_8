@@ -161,7 +161,7 @@ public class UserController {
 					userModel.setTempatLahir(data.get("tempatLahir"));
 					userModel.setTelepon(data.get("telepon"));
 					model.addAttribute("user", userModel);
-					System.out.println("kelar if");
+
 				}
 				return "profile";
 			}
